@@ -1,0 +1,141 @@
+<title>Lernkiste</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Baloo+2:wght@600;800&display=swap">
+<style>
+/* Layout: eine Holzkiste als Kopf, darunter die Spiele als Karteikarten; ein geöffnetes Spiel füllt den Bildschirm unter einer schmalen Leiste. */
+:root{
+  --bg:#F3F6EE; --card:#FFFFFF; --ink:#22301F; --muted:#5E6B58; --line:#D6DFCB;
+  --wood:#B9773A; --wood-dark:#8A5124; --wood-soft:#F6E6D2;
+  --tz:#D9562F; --tz-soft:#FBE3D9; --ck:#14807F; --ck-soft:#D4EEEC; --margin:#E9A3A3;
+  --display:"Baloo 2","Trebuchet MS",system-ui,sans-serif;
+  --body:"Andika","Verdana",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#141A12; --card:#1D251B; --ink:#E7EEE2; --muted:#A1AE99; --line:#2F3A2B;
+  --wood:#D2924F; --wood-dark:#7A4A20; --wood-soft:#33261A;
+  --tz:#F2875F; --tz-soft:#3E271F; --ck:#4CC1BD; --ck-soft:#183533; --margin:#7E4242; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#141A12; --card:#1D251B; --ink:#E7EEE2; --muted:#A1AE99; --line:#2F3A2B;
+  --wood:#D2924F; --wood-dark:#7A4A20; --wood-soft:#33261A;
+  --tz:#F2875F; --tz-soft:#3E271F; --ck:#4CC1BD; --ck-soft:#183533; --margin:#7E4242; color-scheme:dark}
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.5}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible{outline:3px solid var(--tz);outline-offset:2px}
+.wrap{max-width:820px;margin:0 auto;padding-block:22px 48px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  display:flex;flex-direction:column;gap:22px}
+
+/* Kiste */
+.box{background:var(--wood);border-radius:18px;padding:20px 22px 18px;color:#fff;position:relative;overflow:hidden;
+  background-image:repeating-linear-gradient(to bottom,transparent 0 38px,rgba(0,0,0,.12) 38px 40px);
+  box-shadow:inset 0 -10px 0 var(--wood-dark)}
+.box h1{font:800 clamp(38px,9vw,60px)/1 var(--display);margin:0;letter-spacing:.01em;text-shadow:0 2px 0 rgba(0,0,0,.18)}
+.box p{margin:6px 0 10px;font-size:17px;max-width:46ch;color:#FFF5E8}
+.label{display:inline-block;background:#FFF8EC;color:#5A3412;font:700 14px var(--display);letter-spacing:.08em;text-transform:uppercase;
+  padding:3px 12px;border-radius:6px;transform:rotate(-1.5deg)}
+
+h2{font:800 24px/1.1 var(--display);margin:0;text-wrap:balance}
+.games{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.game{background:var(--card);border:2px solid var(--line);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.cover{height:150px;display:grid;place-items:center;position:relative;padding:0 16px 0 40px;text-align:center;
+  background:var(--card);background-image:repeating-linear-gradient(to bottom,transparent 0 29px,var(--line) 29px 30px)}
+.cover::before{content:"";position:absolute;top:0;bottom:0;left:26px;width:2px;background:var(--margin)}
+.cover .w{font:700 clamp(30px,7vw,44px)/1.1 var(--body);white-space:nowrap}
+.cover .a{color:var(--tz);background:var(--tz-soft);border-radius:6px;padding:0 3px}
+.cover .b{color:var(--ck);background:var(--ck-soft);border-radius:6px;padding:0 3px}
+.gbody{padding:16px;display:flex;flex-direction:column;gap:10px;flex:1}
+.gbody h3{font:800 24px/1.1 var(--display);margin:0}
+.gbody p{margin:0;color:var(--muted);font-size:15px}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tags span{background:var(--bg);border-radius:999px;padding:3px 10px;font-size:14px;font-weight:700}
+.play{margin-top:auto;border:none;border-radius:14px;padding:12px;font:800 20px var(--display);color:#fff;background:var(--tz);box-shadow:0 4px 0 #9b3517}
+.play:active{transform:translateY(3px);box-shadow:none}
+:root[data-theme="dark"] .play{color:#1b0f0a}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .play{color:#1b0f0a}}
+
+.soon{border:2px dashed var(--line);border-radius:20px;display:grid;place-items:center;text-align:center;padding:24px;color:var(--muted);font-size:15px;min-height:160px}
+.soon b{display:block;font:800 20px var(--display);color:var(--ink)}
+.note{margin:0;color:var(--muted);font-size:15px;text-align:center}
+
+/* Spielansicht */
+.stage{position:fixed;inset:0;z-index:20;background:var(--bg);display:flex;flex-direction:column;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.topbar{display:flex;align-items:center;gap:10px;padding-block:8px;border-bottom:2px solid var(--line);background:var(--card);
+  padding-left:max(12px,env(safe-area-inset-left,0px));padding-right:max(12px,env(safe-area-inset-right,0px))}
+.back{border:2px solid var(--line);background:var(--bg);border-radius:12px;padding:6px 12px;font:800 16px var(--display);white-space:nowrap}
+.topbar .t{flex:1;min-width:0;font:800 18px var(--display);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+iframe{flex:1;width:100%;border:0;display:block;background:var(--bg)}
+.loading{flex:1;display:grid;place-items:center;color:var(--muted);padding:16px;text-align:center}
+@media (prefers-reduced-motion:reduce){.play:active{transform:none}}
+</style>
+
+<div class="wrap" id="hub">
+  <header class="box">
+    <span class="label">Volksschule</span>
+    <h1>Lernkiste</h1>
+    <p>Spiele zum Üben. Such dir eines aus und leg los.</p>
+  </header>
+
+  <h2>Spiele in der Kiste</h2>
+  <section class="games" aria-label="Spiele">
+    <article class="game">
+      <div class="cover" aria-hidden="true"><div class="w">Ka<span class="a">tz</span>e · Zu<span class="b">ck</span>er</div></div>
+      <div class="gbody">
+        <h3>Rechtschreibspiel</h3>
+        <p>tz oder z, ck oder k: Lücken füllen, richtig oder falsch erkennen und als Fehler-Detektiv falsche Wörter finden. Mit Münzen, Shop und Begleiter.</p>
+        <div class="tags"><span>tz / z</span><span>ck / k</span><span>3 Spielarten</span><span>vorlesen 🔊</span></div>
+        <button class="play" data-game="rechtschreibspiel">Spielen ▶</button>
+      </div>
+    </article>
+    <div class="soon"><div><b>Platz für mehr</b>Hier kommen weitere Spiele dazu.</div></div>
+  </section>
+  <p class="note">Münzen und Einkäufe bleiben auf diesem Gerät gespeichert.</p>
+</div>
+
+<div class="stage" id="stage" hidden>
+  <div class="topbar">
+    <button class="back" id="back">← Lernkiste</button>
+    <span class="t" id="gtitle"></span>
+  </div>
+  <div class="loading" id="loading">Spiel wird geladen …</div>
+  <iframe id="frame" title="Spiel" hidden></iframe>
+</div>
+
+<script>
+const GAMES = {
+  rechtschreibspiel:{file:'rechtschreibspiel.html', title:'Rechtschreibspiel'}
+};
+const $ = id => document.getElementById(id);
+const cache = {};
+
+/* Spiel laden und im Rahmen zeigen (gleiche Herkunft, daher bleibt der Spielstand erhalten) */
+async function openGame(id){
+  const g = GAMES[id]; if (!g) return;
+  $('gtitle').textContent = g.title;
+  $('hub').hidden = true; $('stage').hidden = false;
+  $('frame').hidden = true; $('loading').hidden = false; $('loading').textContent = 'Spiel wird geladen …';
+  try{ history.replaceState(null, '', '#' + id); }catch(e){}
+  try{
+    if (!cache[id]){ const r = await fetch(g.file); if (!r.ok) throw new Error(r.status); cache[id] = await r.text(); }
+    const f = $('frame');
+    f.onload = () => {
+      $('loading').hidden = true; f.hidden = false;
+      try{ const t = document.documentElement.dataset.theme; if (t) f.contentDocument.documentElement.dataset.theme = t; }catch(e){}
+    };
+    f.srcdoc = cache[id];
+  }catch(e){
+    $('loading').textContent = 'Das Spiel konnte nicht geladen werden. Bitte die Seite neu laden.';
+  }
+}
+function closeGame(){
+  $('frame').srcdoc = ''; $('frame').hidden = true;
+  $('stage').hidden = true; $('hub').hidden = false;
+  try{ history.replaceState(null, '', location.pathname); }catch(e){}
+}
+document.querySelectorAll('.play').forEach(b => b.onclick = () => openGame(b.dataset.game));
+$('back').onclick = closeGame;
+const h = (location.hash || '').slice(1);
+if (GAMES[h]) openGame(h);
+</script>
