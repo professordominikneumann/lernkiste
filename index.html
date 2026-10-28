@@ -108,29 +108,22 @@ const GAMES = {
   rechtschreibspiel:{file:'rechtschreibspiel.html', title:'Rechtschreibspiel'}
 };
 const $ = id => document.getElementById(id);
-const cache = {};
-
-/* Spiel laden und im Rahmen zeigen (gleiche Herkunft, daher bleibt der Spielstand erhalten) */
-async function openGame(id){
+/* Spiel direkt als Datei im Rahmen laden (gleiche Herkunft, daher bleibt der Spielstand erhalten).
+   Der Rahmen ist dabei sichtbar, weil Firefox versteckte Rahmen nicht zuverlässig fertig lädt. */
+function openGame(id){
   const g = GAMES[id]; if (!g) return;
   $('gtitle').textContent = g.title;
   $('hub').hidden = true; $('stage').hidden = false;
-  $('frame').hidden = true; $('loading').hidden = false; $('loading').textContent = 'Spiel wird geladen …';
   try{ history.replaceState(null, '', '#' + id); }catch(e){}
-  try{
-    if (!cache[id]){ const r = await fetch(g.file); if (!r.ok) throw new Error(r.status); cache[id] = await r.text(); }
-    const f = $('frame');
-    f.onload = () => {
-      $('loading').hidden = true; f.hidden = false;
-      try{ const t = document.documentElement.dataset.theme; if (t) f.contentDocument.documentElement.dataset.theme = t; }catch(e){}
-    };
-    f.srcdoc = cache[id];
-  }catch(e){
-    $('loading').textContent = 'Das Spiel konnte nicht geladen werden. Bitte die Seite neu laden.';
-  }
+  const f = $('frame');
+  f.hidden = false; $('loading').hidden = true;
+  f.onload = () => {
+    try{ const t = document.documentElement.dataset.theme; if (t) f.contentDocument.documentElement.dataset.theme = t; }catch(e){}
+  };
+  f.src = g.file;
 }
 function closeGame(){
-  $('frame').srcdoc = ''; $('frame').hidden = true;
+  $('frame').src = 'about:blank'; $('frame').hidden = true;
   $('stage').hidden = true; $('hub').hidden = false;
   try{ history.replaceState(null, '', location.pathname); }catch(e){}
 }
