@@ -58,6 +58,13 @@ h2{font:800 24px/1.1 var(--display);margin:0;text-wrap:balance}
 .tags span{background:var(--bg);border-radius:999px;padding:3px 10px;font-size:14px;font-weight:700}
 .play{margin-top:auto;border:none;border-radius:14px;padding:12px;font:800 20px var(--display);color:#fff;background:var(--tz);box-shadow:0 4px 0 #9b3517}
 .play:active{transform:translateY(3px);box-shadow:none}
+.cover.math{background:#24496E;color:#fff;border-bottom:8px solid #8a5a2b;padding:0 16px;font:800 clamp(26px,6vw,36px)/1.15 var(--display)}
+.cover.math::before{display:none}
+.cover.math span{color:#FFE27A}
+.cover.dw .w{font-size:clamp(22px,5vw,30px)}
+.cover.dw i{font-style:normal;color:#2F7D4F;background:#DDEFE2;border-radius:6px;padding:0 3px}
+.play.math{background:#24496E;box-shadow:0 4px 0 #13304d;color:#fff}
+.play.dw{background:#2F7D4F;box-shadow:0 4px 0 #1c5233;color:#fff}
 :root[data-theme="dark"] .play{color:#1b0f0a}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .play{color:#1b0f0a}}
 
@@ -95,9 +102,27 @@ iframe{flex:1;width:100%;border:0;display:block;background:var(--bg)}
         <button class="play" data-game="rechtschreibspiel">Spielen ▶</button>
       </div>
     </article>
+    <article class="game">
+      <div class="cover dw" aria-hidden="true"><div class="w">ich <i>habe</i> geschrieben</div></div>
+      <div class="gbody">
+        <h3>Deutsch-Werkstatt</h3>
+        <p>tz/z und ck/k, vier Zeiten, zusammengesetzte Wörter, Personenbeschreibung, Adjektive, Wortarten und Wortfamilien.</p>
+        <div class="tags"><span>9 Themen</span><span>Werkzeuge</span><span>Begleiter</span></div>
+        <button class="play dw" data-game="deutsch">Spielen ▶</button>
+      </div>
+    </article>
+    <article class="game">
+      <div class="cover math" aria-hidden="true"><div>3 · 4 = <span>12</span><br>12 : 3 = <span>4</span></div></div>
+      <div class="gbody">
+        <h3>Mathe-Werkstatt</h3>
+        <p>Einmaleins und Geteilt-Rechnungen üben, im Tracker sehen, welche Reihen sitzen, Sticker sammeln.</p>
+        <div class="tags"><span>Malreihen</span><span>Geteilt</span><span>Sticker</span></div>
+        <button class="play math" data-game="einmaleins">Spielen ▶</button>
+      </div>
+    </article>
     <div class="soon"><div><b>Platz für mehr</b>Hier kommen weitere Spiele dazu.</div></div>
   </section>
-  <p class="note">Münzen und Einkäufe bleiben auf diesem Gerät gespeichert.</p>
+  <p class="note">Mathe- und Deutsch-Werkstatt teilen sich eine Münzkasse, das Rechtschreibspiel hat eine eigene. Alles bleibt auf diesem Gerät gespeichert.</p>
 </div>
 
 <div class="stage" id="stage" hidden>
@@ -111,7 +136,9 @@ iframe{flex:1;width:100%;border:0;display:block;background:var(--bg)}
 
 <script>
 const GAMES = {
-  rechtschreibspiel:{file:'rechtschreibspiel.html', title:'Rechtschreibspiel'}
+  rechtschreibspiel:{file:'rechtschreibspiel.html', title:'Rechtschreibspiel'},
+  deutsch:{file:'deutsch.html', title:'Deutsch-Werkstatt'},
+  einmaleins:{file:'einmaleins.html', title:'Mathe-Werkstatt'}
 };
 const $ = id => document.getElementById(id);
 /* Spiel direkt als Datei im Rahmen laden (gleiche Herkunft, daher bleibt der Spielstand erhalten).
