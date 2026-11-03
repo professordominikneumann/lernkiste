@@ -94,15 +94,6 @@ iframe{flex:1;width:100%;border:0;display:block;background:var(--bg)}
   <h2>Spiele in der Kiste</h2>
   <section class="games" aria-label="Spiele">
     <article class="game">
-      <div class="cover" aria-hidden="true"><div class="w">Ka<span class="a">tz</span>e · Zu<span class="b">ck</span>er</div></div>
-      <div class="gbody">
-        <h3>Rechtschreibspiel</h3>
-        <p>tz oder z, ck oder k: Lücken füllen, richtig oder falsch erkennen und als Fehler-Detektiv falsche Wörter finden. Mit Münzen, Shop und Begleiter.</p>
-        <div class="tags"><span>tz / z</span><span>ck / k</span><span>3 Spielarten</span><span>vorlesen 🔊</span></div>
-        <button class="play" data-game="rechtschreibspiel">Spielen ▶</button>
-      </div>
-    </article>
-    <article class="game">
       <div class="cover dw" aria-hidden="true"><div class="w">ich <i>habe</i> geschrieben</div></div>
       <div class="gbody">
         <h3>Deutsch-Werkstatt</h3>
@@ -122,7 +113,7 @@ iframe{flex:1;width:100%;border:0;display:block;background:var(--bg)}
     </article>
     <div class="soon"><div><b>Platz für mehr</b>Hier kommen weitere Spiele dazu.</div></div>
   </section>
-  <p class="note">Mathe- und Deutsch-Werkstatt teilen sich eine Münzkasse, das Rechtschreibspiel hat eine eigene. Alles bleibt auf diesem Gerät gespeichert.</p>
+  <p class="note">Mathe- und Deutsch-Werkstatt teilen sich eine Münzkasse. Alles bleibt auf diesem Gerät gespeichert.</p>
 </div>
 
 <div class="stage" id="stage" hidden>
@@ -136,7 +127,6 @@ iframe{flex:1;width:100%;border:0;display:block;background:var(--bg)}
 
 <script>
 const GAMES = {
-  rechtschreibspiel:{file:'rechtschreibspiel.html', title:'Rechtschreibspiel'},
   deutsch:{file:'deutsch.html', title:'Deutsch-Werkstatt'},
   einmaleins:{file:'einmaleins.html', title:'Mathe-Werkstatt'}
 };
@@ -162,6 +152,6 @@ function closeGame(){
 }
 document.querySelectorAll('.play').forEach(b => b.onclick = () => openGame(b.dataset.game));
 $('back').onclick = closeGame;
-const h = (location.hash || '').slice(1);
+const h = (location.hash || '').slice(1).replace('rechtschreibspiel', 'deutsch');
 if (GAMES[h]) openGame(h);
 </script>
