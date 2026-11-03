@@ -160,6 +160,7 @@ p{margin:0;color:var(--muted);line-height:1.45}
 <div class="wrap">
   <header>
     <div class="who" id="who">Hallo!<small>Mathe-Werkstatt</small></div>
+    <span id="plT"></span>
     <div class="purse" id="purse" aria-label="Münzen"><span class="coin">€</span><span id="coins">0</span></div>
   </header>
 
@@ -204,6 +205,7 @@ p{margin:0;color:var(--muted);line-height:1.45}
       <p id="advInfo" style="text-align:center" hidden>Nur 15 Sekunden pro Rechnung, dann kommt die nächste. Falsche Rechnungen kommen am Ende nochmal. Dafür gibt es 2 Münzen pro richtiger Aufgabe.</p>
       <button class="big" id="startBtn">Los geht's!</button>
       <button class="chip" id="slowBtn" style="align-self:center">⏱ Langsamste Rechnungen üben</button>
+      <div id="plB"></div>
     </div>
 
     <div class="panel" id="game" hidden>
@@ -352,12 +354,12 @@ function renderPlayers(){
   $("players").innerHTML="";
   Object.keys(db.players).forEach(n=>{
     const b=document.createElement("button");b.textContent=n;b.setAttribute("aria-pressed",n===db.current);
-    b.onclick=()=>{db.current=n;save();renderPlayers();renderHead();renderSlowBtn();if(!$("fort").hidden)renderTracker()};$("players").appendChild(b);
+    b.onclick=()=>{db.current=n;save();renderPlayers();renderHead();renderSlowBtn();PlayLog.refresh();if(!$("fort").hidden)renderTracker()};$("players").appendChild(b);
   });
 }
 $("addForm").onsubmit=e=>{e.preventDefault();const n=$("newName").value.trim();if(!n)return;
   if(!db.players[n])db.players[n]={coins:0,stickers:[],vouchers:[]};
-  db.current=n;$("newName").value="";save();renderPlayers();renderHead();renderSlowBtn();toast(`Hallo ${n}!`)};
+  db.current=n;$("newName").value="";save();renderPlayers();renderHead();renderSlowBtn();PlayLog.refresh();toast(`Hallo ${n}!`)};
 
 // ---------- Reihen ----------
 function renderRows(){
@@ -410,7 +412,10 @@ function start(list,prev){
   let tasks,rep;
   if(list){tasks=twice(list);rep=new Set(list.map(keyOf))}else({tasks,rep}=makeTasks());
   g={tasks,rep,prev:prev||{},repeat:!!list,adv:!!db.adv,tries:{},i:0,res:[],ms:[],input:"",streak:0,earned:0,lock:false};
-  $("setup").hidden=true;$("done").hidden=true;$("game").hidden=false;showTask();
+  $("setup").hidden=true;$("done").hidden=true;$("game").hidden=false;
+  const opN={m:"Malrechnen",d:"Geteilt",md:"Gemischt"}[db.op||"m"];
+  PlayLog.start(list?"Wiederholung langsamer Rechnungen":`${opN} · Reihen ${db.rows.slice().sort((a,b)=>a-b).join(", ")}${g.adv?" · 15 s":""}`,tasks.length);
+  showTask();
 }
 function startSlowStored(){
   const s=slowStored(5,false);if(!s.length)return;
@@ -430,7 +435,7 @@ function requeue(t){            // Fortgeschrittene: falsche Rechnung kommt am E
 function timeout(){
   if(g.lock)return;g.lock=true;clearInterval(tick);drawClock(LIMIT);
   const t=g.tasks[g.i];g.res[g.i]=false;g.ms[g.i]=LIMIT;g.streak=0;
-  const p=P();p.times=p.times||{};p.times[keyOf(t)]={ms:LIMIT,wrong:true};learn(t,false,LIMIT);save();
+  const p=P();p.times=p.times||{};p.times[keyOf(t)]={ms:LIMIT,wrong:true};learn(t,false,LIMIT);save();PlayLog.progress(g.res.filter(Boolean).length,g.tasks.length);
   const again=requeue(t);
   $("fb").textContent=`⏰ Zeit ist um! ${label(t)}${again?" – kommt nochmal":""}`;beep(220,.3,"triangle");
   const bd=$("board");bd.classList.remove("shake");void bd.offsetWidth;bd.classList.add("shake");setTimeout(next,2400);
@@ -440,7 +445,7 @@ $("startBtn").onclick=()=>{beep(660);start()};
 $("slowBtn").onclick=startSlowStored;
 $("againBtn").onclick=()=>start();
 $("toShop").onclick=()=>showTab("laden");
-$("quit").onclick=()=>{clearInterval(tick);$("game").hidden=true;$("setup").hidden=false;renderSlowBtn()};
+$("quit").onclick=()=>{clearInterval(tick);PlayLog.end(false);$("game").hidden=true;$("setup").hidden=false;renderSlowBtn()};
 
 function drawClock(ms){
   if(ms==null)ms=performance.now()-g.t0;
@@ -473,7 +478,7 @@ function press(k){
 function check(){
   g.lock=true;const ms=performance.now()-g.t0;clearInterval(tick);drawClock(ms);
   const t=g.tasks[g.i],key=keyOf(t),right=rightOf(t),ok=+g.input===right;g.res[g.i]=ok;g.ms[g.i]=ms;
-  const p=P();p.times=p.times||{};p.times[key]={ms:Math.round(ms),wrong:!ok};const newly=learn(t,ok,ms);save();
+  const p=P();p.times=p.times||{};p.times[key]={ms:Math.round(ms),wrong:!ok};const newly=learn(t,ok,ms);save();PlayLog.progress(g.res.filter(Boolean).length,g.tasks.length+(ok?0:0));
   if(newly)setTimeout(()=>toast(`🏅 Meister-Sticker: Du kannst die ${newly}!`),300);
   const before=g.prev[key];
   const cmp=ok&&before&&ms<before?` · schneller als vorher (${fmt(before)})!`:"";
@@ -488,7 +493,8 @@ function finish(){
   clearInterval(tick);
   const total=g.tasks.length,n=g.res.filter(Boolean).length;$("game").hidden=true;$("done").hidden=false;
   $("score").textContent=`${n} / ${total}`;
-  $("earned").textContent=`Du hast ${g.earned} Münzen verdient. In deiner Kasse sind jetzt ${P().coins} Münzen.`;
+  PlayLog.progress(n,total);const playMs=PlayLog.end(true);
+  $("earned").textContent=`Du hast ${g.earned} Münzen verdient. In deiner Kasse sind jetzt ${P().coins} Münzen. Spielzeit: ${PlayLog.fmt(playMs)}.`;
   if(n===total){addCoins(5,$("score"));$("earned").textContent+=" Alles richtig: 5 Extra-Münzen!"}
   // Zeiten je Rechnung zusammenfassen (bei Wiederholung: beste Zeit)
   const by={};
@@ -595,6 +601,82 @@ function renderAlbum(){
     else{b.dataset.armed=1;b.textContent="Sicher?"}});
 }
 
+// ---------- Spielzeit & Spielprotokoll (gemeinsam für alle Spiele der Lernkiste) ----------
+const PlayLog=(function(){
+  const KEYL='lernkiste-log';
+  const css=`.pl-timer{font:800 15px var(--display);color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap;background:var(--card,var(--paper,#fff));border:2px solid var(--line);border-radius:999px;padding:3px 10px}
+.pl-box{font-size:15px;color:var(--muted);background:var(--card,var(--paper,#fff));border:2px solid var(--line);border-radius:14px;padding:10px 12px;display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;justify-content:space-between}
+.pl-box b{color:var(--ink)}
+.pl-btn{font:800 14px var(--display);border:2px solid var(--line);background:var(--bg,var(--sky,#fff));color:var(--ink);border-radius:999px;padding:5px 12px;cursor:pointer}
+.pl-ov{position:fixed;inset:0;z-index:80;background:rgba(10,20,30,.5);display:flex;align-items:flex-end;justify-content:center;padding-top:max(24px,env(safe-area-inset-top,0px))}
+.pl-panel{background:var(--bg,var(--sky,#f4f7fb));color:var(--ink);width:100%;max-width:720px;max-height:100%;overflow:auto;border-radius:20px 20px 0 0;
+  padding-block:18px max(24px,env(safe-area-inset-bottom,0px));padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:12px}
+@media (min-width:740px){.pl-ov{align-items:center}.pl-panel{border-radius:20px;max-height:88vh}}
+.pl-head{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.pl-head h2{font:800 24px var(--display);margin:0}
+.pl-sum{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.pl-sum div{background:var(--card,var(--paper,#fff));border:2px solid var(--line);border-radius:12px;padding:8px;text-align:center}
+.pl-sum b{display:block;font:800 22px var(--display);font-variant-numeric:tabular-nums}
+.pl-sum span{font-size:13px;color:var(--muted)}
+.pl-tw{overflow-x:auto;background:var(--card,var(--paper,#fff));border-radius:12px;border:2px solid var(--line)}
+.pl-t{width:100%;border-collapse:collapse;font-size:14px;font-variant-numeric:tabular-nums}
+.pl-t th,.pl-t td{padding:7px 10px;text-align:left;white-space:nowrap;border-top:1px solid var(--line)}
+.pl-t th{border-top:0;font:700 13px var(--display);color:var(--muted)}
+.pl-t .ab{color:var(--muted);font-size:12px}
+.pl-note{margin:0;color:var(--muted);font-size:14px}`;
+  const st=document.createElement('style');st.textContent=css;document.head.appendChild(st);
+  const read=()=>{try{const a=JSON.parse(localStorage.getItem(KEYL)||'[]');return Array.isArray(a)?a:[]}catch(e){return[]}};
+  const pad=n=>String(n).padStart(2,'0');
+  const fmt=ms=>{const s=Math.round(ms/1000),h=Math.floor(s/3600),m=Math.floor(s%3600/60),x=s%60;return h?`${h}:${pad(m)}:${pad(x)}`:`${m}:${pad(x)}`};
+  const fD=t=>new Date(t).toLocaleDateString('de-AT',{weekday:'short',day:'2-digit',month:'2-digit',year:'numeric'});
+  const fT=t=>new Date(t).toLocaleTimeString('de-AT',{hour:'2-digit',minute:'2-digit'});
+  const e=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  let cfg,cur=null,last=0,n=0,timerEl,boxEl;
+  // Eintrag ins gemeinsame Protokoll schreiben (frisch lesen, damit andere Spiele nichts verlieren)
+  function write(){if(!cur)return;try{const a=read();const i=a.findIndex(x=>x.id===cur.id);if(i>=0)a[i]=cur;else a.push(cur);
+    localStorage.setItem(KEYL,JSON.stringify(a.slice(-500)))}catch(x){}}
+  function tick(){if(!cur)return;const now=performance.now(),d=now-last;last=now;
+    if(document.visibilityState==='visible'&&d<5000)cur.ms+=d;if(timerEl)timerEl.textContent='⏱ '+fmt(cur.ms);}
+  setInterval(()=>{if(!cur)return;tick();if(++n%5===0)write()},1000);
+  document.addEventListener('visibilitychange',()=>{tick();write()});
+  addEventListener('pagehide',()=>{tick();write()});
+  function sums(kid){const d=new Date();d.setHours(0,0,0,0);const day=d.getTime(),wk=day-((d.getDay()+6)%7)*864e5;
+    let t=0,w=0,a=0;read().filter(x=>!kid||x.kid===kid).forEach(x=>{a+=x.ms;if(x.start>=wk)w+=x.ms;if(x.start>=day)t+=x.ms});return{t,w,a}}
+  function renderBox(){if(!boxEl)return;const s=sums(cfg.kid());
+    boxEl.innerHTML=`<span>⏱ <b>${e(cfg.kid())}</b>: heute ${fmt(s.t)} · diese Woche ${fmt(s.w)} · insgesamt ${fmt(s.a)}</span><button class="pl-btn" type="button">Spielprotokoll</button>`;
+    boxEl.querySelector('button').onclick=open;}
+  function open(){
+    let who=cfg.kid();
+    const ov=document.createElement('div');ov.className='pl-ov';
+    const draw=()=>{const all=read(),kids=[...new Set(all.map(x=>x.kid))];const list=all.filter(x=>who==='*'||x.kid===who).reverse(),s=sums(who==='*'?null:who);
+      ov.innerHTML=`<div class="pl-panel" role="dialog" aria-modal="true" aria-label="Spielprotokoll">
+        <div class="pl-head"><h2>Spielprotokoll</h2><button class="pl-btn" data-x>✕ Schließen</button></div>
+        <p class="pl-note">Gezählt wird nur die Zeit, in der ein Spiel offen im Vordergrund ist. Das Protokoll gilt für alle Spiele der Lernkiste auf diesem Gerät.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:6px">${[...new Set([cfg.kid(),...kids])].map(k=>`<button class="pl-btn" data-k="${e(k)}" style="${k===who?'background:var(--ink);color:var(--card,var(--paper,#fff))':''}">${e(k)}</button>`).join('')}
+          <button class="pl-btn" data-k="*" style="${who==='*'?'background:var(--ink);color:var(--card,var(--paper,#fff))':''}">Alle Kinder</button></div>
+        <div class="pl-sum"><div><b>${fmt(s.t)}</b><span>Heute</span></div><div><b>${fmt(s.w)}</b><span>Diese Woche</span></div><div><b>${fmt(s.a)}</b><span>Insgesamt</span></div></div>
+        ${list.length?`<div class="pl-tw"><table class="pl-t"><thead><tr><th>Datum</th><th>Uhrzeit</th><th>Dauer</th>${who==='*'?'<th>Kind</th>':''}<th>Spiel</th><th>Was</th><th>Richtig</th></tr></thead><tbody>
+        ${list.map(x=>`<tr><td>${fD(x.start)}</td><td>${fT(x.start)}–${fT(x.end)}</td><td>${fmt(x.ms)}</td>${who==='*'?`<td>${e(x.kid)}</td>`:''}<td>${e(x.game)}</td><td>${e(x.what)}</td>
+          <td>${x.correct}/${x.total}${x.done?'':' <span class="ab">abgebrochen</span>'}</td></tr>`).join('')}</tbody></table></div>`:'<p class="pl-note">Noch keine Runden gespielt.</p>'}
+      </div>`;
+      ov.querySelector('[data-x]').onclick=close;
+      ov.querySelectorAll('[data-k]').forEach(b=>b.onclick=()=>{who=b.dataset.k;draw()});};
+    const close=()=>{ov.remove();document.removeEventListener('keydown',esc)};
+    const esc=ev=>{if(ev.key==='Escape')close()};
+    ov.addEventListener('click',ev=>{if(ev.target===ov)close()});document.addEventListener('keydown',esc);
+    draw();document.body.appendChild(ov);ov.querySelector('[data-x]').focus();
+  }
+  return{
+    init(c){cfg=c;timerEl=document.createElement('span');timerEl.className='pl-timer';timerEl.hidden=true;timerEl.setAttribute('aria-label','Spielzeit');
+      c.timerHost.appendChild(timerEl);boxEl=document.createElement('div');boxEl.className='pl-box';c.boxHost.appendChild(boxEl);renderBox();},
+    start(what,total){if(cur)this.end(false);cur={id:Date.now()+'-'+Math.random().toString(36).slice(2,6),kid:cfg.kid(),game:cfg.game,what,start:Date.now(),end:Date.now(),ms:0,correct:0,total,done:false};
+      last=performance.now();write();timerEl.hidden=false;timerEl.textContent='⏱ 0:00';},
+    progress(correct,total){if(!cur)return;cur.correct=correct;if(total!=null)cur.total=total;cur.end=Date.now();},
+    end(done){if(!cur)return 0;tick();cur.done=!!done;cur.end=Date.now();write();const ms=cur.ms;cur=null;timerEl.hidden=true;renderBox();return ms;},
+    refresh:renderBox,fmt
+  };
+})();
+PlayLog.init({game:'Mathe-Werkstatt',kid:()=>db.current,timerHost:$('plT'),boxHost:$('plB')});
 renderHead();renderPlayers();renderRows();renderOps();renderSlowBtn();renderAdv();
 if(window.OPEN_SHOP)showTab("laden");
 </script>
