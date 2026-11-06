@@ -7,6 +7,7 @@
   --bg:#F1F5EE; --card:#FFFFFF; --ink:#1F2B24; --muted:#5A675E; --line:#D3DECF;
   --green:#2F7D4F; --green-soft:#DDEFE2; --mustard:#C98A0B; --mustard-soft:#FFF1CC;
   --ok:#2C8F4A; --ok-soft:#DDF1E3; --bad:#C93C3C; --bad-soft:#F8DEDE;
+  --wn:#2563B8; --wn-soft:#DCE8F8; --wv:#C93C3C; --wv-soft:#F8DEDE; --wj:#2C8F4A; --wj-soft:#DDF1E3;
   --display:"Baloo 2","Trebuchet MS",system-ui,sans-serif;
   --body:"Andika","Verdana",system-ui,sans-serif;
   color-scheme:light;
@@ -14,11 +15,13 @@
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --bg:#121A15; --card:#1B261F; --ink:#E5EEE7; --muted:#9DB0A3; --line:#2C3D32;
   --green:#6CC892; --green-soft:#1A3324; --mustard:#F2C14E; --mustard-soft:#3A2F14;
-  --ok:#5CC77D; --ok-soft:#1C3424; --bad:#F07474; --bad-soft:#3D2022; color-scheme:dark}}
+  --ok:#5CC77D; --ok-soft:#1C3424; --bad:#F07474; --bad-soft:#3D2022;
+  --wn:#7FB2F0; --wn-soft:#1B2C45; --wv:#F07474; --wv-soft:#3D2022; --wj:#5CC77D; --wj-soft:#1C3424; color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#121A15; --card:#1B261F; --ink:#E5EEE7; --muted:#9DB0A3; --line:#2C3D32;
   --green:#6CC892; --green-soft:#1A3324; --mustard:#F2C14E; --mustard-soft:#3A2F14;
-  --ok:#5CC77D; --ok-soft:#1C3424; --bad:#F07474; --bad-soft:#3D2022; color-scheme:dark}
+  --ok:#5CC77D; --ok-soft:#1C3424; --bad:#F07474; --bad-soft:#3D2022;
+  --wn:#7FB2F0; --wn-soft:#1B2C45; --wv:#F07474; --wv-soft:#3D2022; --wj:#5CC77D; --wj-soft:#1C3424; color-scheme:dark}
 *{box-sizing:border-box}
 html{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.5}
@@ -112,6 +115,31 @@ button.purse{cursor:pointer;color:var(--ink)}
 .gap.ok{border-bottom:4px solid var(--ok);color:var(--ok);background:var(--ok-soft)}
 .gap.bad{border-bottom:4px solid var(--bad);color:var(--bad);background:var(--bad-soft);text-decoration:line-through}
 .opts{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.wd{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;max-width:100%}
+.wd .tok{font:700 clamp(20px,5vw,28px) var(--body);padding:4px 10px;border-radius:10px;border:2.5px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+.wd .pun{font:700 clamp(20px,5vw,28px) var(--body);align-self:flex-end;padding:4px 0}
+.wd .tok[aria-pressed="true"]{border-color:var(--ink);background:var(--mustard-soft);box-shadow:0 3px 0 var(--mustard)}
+.wd .tok:disabled{cursor:default}
+.tN{color:var(--wn)!important;background:var(--wn-soft)!important;border-color:var(--wn)!important}
+.tV{color:var(--wv)!important;background:var(--wv-soft)!important;border-color:var(--wv)!important}
+.tJ{color:var(--wj)!important;background:var(--wj-soft)!important;border-color:var(--wj)!important}
+.wd .tok.miss{outline:3px dashed var(--bad);outline-offset:2px}
+.wd .tok.extra{text-decoration:line-through;text-decoration-thickness:3px}
+.target{display:inline-block;border-radius:8px;padding:0 8px;border:2px solid currentColor}
+.legend3{display:flex;flex-wrap:wrap;gap:6px 12px;justify-content:center;font-size:14px;color:var(--muted)}
+.legend3 span{display:flex;align-items:center;gap:5px}.legend3 i{width:14px;height:14px;border-radius:4px;display:inline-block}
+.buckets{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;width:100%}
+.bucket{border:2.5px dashed currentColor;border-radius:14px;min-height:130px;padding:8px 6px;display:flex;flex-direction:column;align-items:center;gap:6px;background:var(--card);cursor:pointer;min-width:0}
+.bucket b{font:800 15px/1.1 var(--display)}.bucket small{font-size:12px;color:var(--muted)}
+.bucket.hover{border-style:solid}
+.bucket.bN{color:var(--wn)}.bucket.bV{color:var(--wv)}.bucket.bJ{color:var(--wj)}
+.bucket .chip{font:700 clamp(15px,4vw,19px) var(--body);padding:3px 8px;border-radius:9px;border:2px solid var(--line);background:var(--bg);color:var(--ink);max-width:100%;overflow-wrap:anywhere}
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;min-height:48px}
+.chips .chip{font:700 clamp(18px,4.6vw,22px) var(--body);padding:6px 12px;border-radius:10px;border:2.5px solid var(--ink);background:var(--card);color:var(--ink);cursor:grab;touch-action:none;user-select:none}
+.chip[aria-pressed="true"]{background:var(--mustard-soft);box-shadow:0 3px 0 var(--mustard)}
+.bucket .chip.ok{border-color:var(--ok);background:var(--ok-soft)}.bucket .chip.no{border-color:var(--bad);background:var(--bad-soft)}
+.bucket .chip.no s{text-decoration-thickness:2px}.bucket .chip .fix{display:block;font-size:.8em;color:var(--bad)}
+.chips:empty{display:none}
 .opt{font:700 clamp(18px,4.4vw,22px) var(--body);padding:10px 16px;border-radius:12px;border:2.5px solid var(--green);background:var(--green-soft);
   color:var(--ink);cursor:grab;touch-action:none;user-select:none;max-width:100%}
 .opt.right{border-color:var(--ok);background:var(--ok-soft);color:var(--ok)}
@@ -284,6 +312,36 @@ const SENT = [
   'Leo:N trinkt:V kalten:J Apfelsaft:N .','Meine Schwester:N singt:V ein lustiges:J Lied:N .','Der Ball:N rollt:V über die grüne:J Wiese:N .',
   'Der Bäcker:N backt:V frisches:J Brot:N .','Die alte:J Eule:N fliegt:V in den Wald:N .'
 ];
+// Wortarten-Detektiv: vollständig markierte Sätze (alle Nomen, Verben, Adjektive)
+const SENT2 = [
+  'Der kleine:J Hund:N bellt:V laut:J .','Die Kinder:N spielen:V im Garten:N .','Mein Opa:N fährt:V ein rotes:J Auto:N .',
+  'Die Sonne:N scheint:V hell:J .','Anna:N liest:V ein spannendes:J Buch:N .','Der Lehrer:N schreibt:V an die grüne:J Tafel:N .',
+  'Die Katze:N schläft:V auf dem weichen:J Sofa:N .','Leo:N trinkt:V kalten:J Apfelsaft:N .','Meine Schwester:N singt:V ein lustiges:J Lied:N .',
+  'Der bunte:J Ball:N rollt:V über die Wiese:N .','Der Bäcker:N backt:V frisches:J Brot:N .','Die alte:J Eule:N fliegt:V in den dunklen:J Wald:N .',
+  'Im Winter:N ist:V es kalt:J .','Mia:N hat:V einen neuen:J Rucksack:N .','Der schnelle:J Fuchs:N springt:V über den Zaun:N .',
+  'Wir bauen:V im Sand:N eine große:J Burg:N .','Papa:N kocht:V heute eine heiße:J Suppe:N .','Die müden:J Kinder:N gehen:V früh ins Bett:N .',
+  'Das kleine:J Baby:N lacht:V fröhlich:J .','Oma:N gießt:V die bunten:J Blumen:N im Garten:N .','Der Hase:N hoppelt:V schnell:J über das Feld:N .',
+  'Ich male:V ein großes:J Bild:N .','Der Regen:N ist:V nass:J und kalt:J .','Tim:N und Lena:N lesen:V ein dickes:J Buch:N .'
+];
+const WL = {
+  N:['Hund','Schule','Apfel','Fenster','Freund','Blume','Tisch','Mutter','Wolke','Fahrrad','Schnee','Lehrerin','Brille','Garten'],
+  V:['laufen','schreiben','essen','spielt','singen','lacht','springen','kocht','schlafen','malt','rennen','baut','trinkt','lesen'],
+  J:['groß','klein','schnell','bunt','laut','leise','warm','kalt','müde','lustig','weich','dunkel','nass','fröhlich']
+};
+const WNAME = {N:'Nomen', V:'Verben', J:'Adjektive'}, WONE = {N:'Nomen', V:'Verb', J:'Adjektiv'};
+const WTIP = {N:'Nomen schreibt man groß, man kann der, die oder das davorsetzen.', V:'Verben sagen, was jemand tut.', J:'Adjektive sagen, wie etwas ist.'};
+const LEG3 = '<div class="legend3"><span><i class="tN" style="border:0"></i>Nomen</span><span><i class="tV" style="border:0"></i>Verb</span><span><i class="tJ" style="border:0"></i>Adjektiv</span></div>';
+const parseSent = s => s.split(' ').map(t => { const [w,tag] = t.split(':'); return {w, tag:tag||null, pun:/^[.,!?]$/.test(w)}; });
+function genWaDet(){
+  if (Math.random() < 0.6){
+    const s = pick(SENT2), toks = parseSent(s), tags = [...new Set(toks.filter(t=>t.tag).map(t=>t.tag))], tag = pick(tags);
+    return {k:'d1'+s+tag, kind:'multi', toks, tag, a:toks.filter(t=>t.tag===tag).map(t=>t.w).join(', '),
+      prompt:`Tippe <b>alle</b> <span class="target t${tag}">${WNAME[tag]}</span> im Satz an.`, why:WTIP[tag]};
+  }
+  const words = shuf(['N','V','J'].flatMap(t => shuf(WL[t]).slice(0,2).map(w => ({w, tag:t}))));
+  return {k:'d2'+words.map(x=>x.w).join(), kind:'sort', words, a:words.map(x=>`${x.w} = ${WONE[x.tag]}`).join(', '),
+    prompt:'Sortiere die Wörter: <b>Nomen</b>, <b>Verb</b> oder <b>Adjektiv</b>?', why:Object.values(WTIP).join(' ')};
+}
 const WA = {N:'Nomen (Namenwort)', V:'Verb (Tunwort)', J:'Adjektiv (Wiewort)'};
 const WA_WHY = {N:'Nomen schreibt man groß. Man kann der, die oder das davor setzen.', V:'Verben sagen, was jemand tut oder was geschieht.', J:'Adjektive sagen, wie etwas ist.'};
 // Wortfamilien: [Familie, Stamm, Mitglieder, fremdes Wort]
@@ -454,6 +512,7 @@ const TOPICS = [
   {id:'person', icon:'🧑', name:'Personenbeschreibung', info:'Haare, Augen, Kleidung beschreiben', gen:genPerson},
   {id:'adj', icon:'📈', name:'Adjektive steigern', info:'groß – größer – am größten', gen:genAdj},
   {id:'nomen', icon:'🏠', name:'Nomen mit Adjektiv', info:'das Haus ist schön → das schöne Haus', gen:genNomen},
+  {id:'wadet', icon:'🔍', name:'Wortarten-Detektiv', info:'Nomen, Verben, Adjektive im Satz finden und sortieren', gen:genWaDet},
   {id:'wortart', icon:'🏷️', name:'Wortarten', info:'Nomen, Verb oder Adjektiv?', gen:genWortart},
   {id:'fam', icon:'🌳', name:'Wortfamilien', info:'fahren, Fahrer, Fahrrad …', gen:genFam},
   {id:'mix', icon:'🎲', name:'Alles gemischt', info:'Aufgaben aus allen Themen'}
@@ -601,6 +660,7 @@ function render(){
   if (S.i >= S.tasks.length) return renderEnd();
   S.locked = false;
   const q = S.tasks[S.i];
+  if (q.kind) return renderSpecial(q);
   const gapHTML = '<span class="gap" id="gap" data-drop aria-label="Lücke">&nbsp;</span>';
   sheet.innerHTML = `
     <div class="top"><span class="tname">${q.topic}</span>
@@ -618,6 +678,91 @@ function render(){
   sheet.querySelectorAll('.opt').forEach(b => draggable(b, () => answer(+b.dataset.k), !q.noGap));
   if ($('spk')) $('spk').onclick = () => say(q.say);
 }
+function topHTML(q){
+  return `<div class="top"><span class="tname">${q.topic}</span>
+      <div class="dots">${S.tasks.map((_,k)=>`<span class="dot ${S.res[k]===true?'ok':S.res[k]===false?'bad':''} ${k===S.i?'now':''}"></span>`).join('')}</div><div class="tright">${petHTML()}</div></div>`;
+}
+function settle(q, ok, wrongText, fx){
+  S.res[S.i] = ok;
+  const fb = $('fb'); fb.className = 'fb ' + (ok?'ok':'bad');
+  let again = false;
+  if (!ok){ S.tries[q.k] = (S.tries[q.k]||0) + 1; if (S.tries[q.k] <= 2){ S.tasks.push(Object.assign({}, q, {again:true}, q.words ? {words:shuf(q.words)} : {})); again = true; } }
+  fb.innerHTML = (ok ? `Richtig! <span class="earn">+1 🪙</span>` : `${wrongText}${again?' – kommt am Ende nochmal':''}`) + `<span class="why">${q.why}</span>`;
+  PlayLog.progress(S.res.filter(Boolean).length, S.tasks.length);
+  if (ok){ addCoins(1); confetti(fx); petSay(pick(PRAISE)); } else petSay(pick(COMFORT));
+  const last = S.i === S.tasks.length-1;
+  $('next').innerHTML = `<button class="big" id="go">${last ? 'Ergebnis ansehen' : 'Weiter →'}</button>`;
+  $('go').onclick = () => { S.i++; render(); };
+  $('go').focus({preventScroll:true});
+}
+function renderSpecial(q){
+  const head = `${topHTML(q)}<div class="stage">${q.again ? '<span class="rep">🔁 Wiederholung</span>' : ''}<p class="prompt">${q.prompt}</p>`;
+  const tail = `<p class="fb" id="fb"></p><div id="next"><button class="big" id="check">Prüfen</button></div></div>`;
+  if (q.kind === 'multi'){
+    sheet.innerHTML = head + `<div class="wd" id="wd">${q.toks.map((t,i)=>t.pun?`<span class="pun">${esc(t.w)}</span>`:`<button class="tok" data-i="${i}" aria-pressed="false">${esc(t.w)}</button>`).join('')}</div>
+      <p class="hint">Tipp die Wörter an. Nochmal tippen nimmt die Markierung weg.</p>` + tail;
+    sheet.querySelectorAll('.tok').forEach(b => b.onclick = () => { if (S.locked) return; b.setAttribute('aria-pressed', b.getAttribute('aria-pressed')!=='true'); });
+    $('check').onclick = () => {
+      const picked = [...sheet.querySelectorAll('.tok[aria-pressed="true"]')];
+      if (!picked.length){ $('fb').className='fb bad'; $('fb').textContent = `Tippe zuerst die ${WNAME[q.tag]} an.`; return; }
+      S.locked = true;
+      let ok = true;
+      sheet.querySelectorAll('.tok').forEach(b => { const t = q.toks[+b.dataset.i], on = b.getAttribute('aria-pressed')==='true', hit = t.tag===q.tag;
+        b.disabled = true; b.setAttribute('aria-pressed','false');
+        if (t.tag) b.classList.add('t'+t.tag);
+        if (hit && !on){ ok = false; b.classList.add('miss'); }
+        if (!hit && on){ ok = false; b.classList.add('extra'); } });
+      $('wd').insertAdjacentHTML('afterend', LEG3);
+      settle(q, ok, `Die ${WNAME[q.tag]} sind: <b>${esc(q.a)}</b>`, $('wd'));
+    };
+    return;
+  }
+  // sort
+  sheet.innerHTML = head + `<div class="chips" id="pool">${q.words.map((x,i)=>`<button class="chip" data-i="${i}" aria-pressed="false">${esc(x.w)}</button>`).join('')}</div>
+    <div class="buckets">${['N','V','J'].map(t=>`<div class="bucket b${t}" data-bucket="${t}" role="button" tabindex="0" aria-label="${WONE[t]}"><b>${WONE[t]}</b><small>${{N:'der, die, das',V:'Was tut jemand?',J:'Wie ist etwas?'}[t]}</small></div>`).join('')}</div>
+    <p class="hint">Zieh jedes Wort in den richtigen Korb. Oder tipp zuerst das Wort und dann den Korb an.</p>` + tail;
+  let sel = null;
+  const place = (chip, bucket) => { if (S.locked) return; chip.setAttribute('aria-pressed','false'); (bucket || $('pool')).appendChild(chip); sel = null; };
+  const chips = [...sheet.querySelectorAll('.chip')];
+  chips.forEach(c => {
+    c.addEventListener('pointerdown', e => {
+      if (S.locked || e.button!==0) return;
+      const sx=e.clientX, sy=e.clientY; let ghost=null, over=null, ox=0, oy=0;
+      try{ c.setPointerCapture(e.pointerId); }catch(_){}
+      const move = ev => {
+        if (!ghost && Math.hypot(ev.clientX-sx, ev.clientY-sy) > 6){
+          const r = c.getBoundingClientRect(); ghost = c.cloneNode(true); ghost.classList.add('ghost');
+          Object.assign(ghost.style,{width:r.width+'px',height:r.height+'px'}); ox=sx-r.left; oy=sy-r.top; document.body.appendChild(ghost); c.style.opacity='.35';
+        }
+        if (ghost){ ghost.style.left=(ev.clientX-ox)+'px'; ghost.style.top=(ev.clientY-oy)+'px';
+          const t = document.elementFromPoint(ev.clientX, ev.clientY), d = t && t.closest('[data-bucket],#pool');
+          if (d!==over){ over && over.classList.remove('hover'); over = d; over && over.classList.add('hover'); } }
+      };
+      const up = ev => {
+        c.removeEventListener('pointermove', move); c.removeEventListener('pointerup', up); c.removeEventListener('pointercancel', up);
+        if (ghost){ ghost.remove(); c.style.opacity=''; over && over.classList.remove('hover'); if (over && ev.type==='pointerup') place(c, over.id==='pool' ? null : over); }
+        else if (ev.type==='pointerup'){
+          if (c.parentElement.id !== 'pool'){ if (sel){ place(sel, c.parentElement); return; } place(c, null); return; }   // im Korb antippen = zurück
+          chips.forEach(x => x.setAttribute('aria-pressed', x===c && sel!==c ? 'true' : 'false')); sel = sel===c ? null : c;
+        }
+      };
+      c.addEventListener('pointermove', move); c.addEventListener('pointerup', up); c.addEventListener('pointercancel', up);
+    });
+    c.addEventListener('click', e => { if (e.detail===0){ chips.forEach(x => x.setAttribute('aria-pressed', x===c?'true':'false')); sel = c; } });
+  });
+  sheet.querySelectorAll('[data-bucket]').forEach(bk => {
+    const go = () => { if (sel) place(sel, bk); };
+    bk.addEventListener('click', e => { if (!e.target.closest('.chip')) go(); });
+    bk.addEventListener('keydown', e => { if (e.key==='Enter' || e.key===' '){ e.preventDefault(); go(); } });
+  });
+  $('check').onclick = () => {
+    if ($('pool').querySelector('.chip')){ $('fb').className='fb bad'; $('fb').textContent = 'Sortiere zuerst alle Wörter in einen Korb.'; return; }
+    S.locked = true; let ok = true;
+    sheet.querySelectorAll('[data-bucket] .chip').forEach(c => { const x = q.words[+c.dataset.i], right = x.tag === c.parentElement.dataset.bucket;
+      c.classList.add(right ? 'ok' : 'no'); if (!right){ ok = false; c.innerHTML = `<s>${esc(x.w)}</s><span class="fix">→ ${WONE[x.tag]}</span>`; } });
+    settle(q, ok, 'Nicht alle Wörter sind im richtigen Korb.', sheet.querySelector('.buckets'));
+  };
+}
 function answer(k){
   if (S.locked) return; S.locked = true;
   const q = S.tasks[S.i], val = q.opts[k], ok = val === q.a;
@@ -628,7 +773,7 @@ function answer(k){
     if (q.opts[+b.dataset.k] === q.a) b.classList.add('right'); else if (+b.dataset.k === k) b.classList.add('wrong'); });
   const fb = $('fb'); fb.className = 'fb ' + (ok?'ok':'bad');
   let again = false;
-  if (!ok){ S.tries[q.k] = (S.tries[q.k]||0) + 1; if (S.tries[q.k] <= 2){ S.tasks.push(Object.assign({}, q, {again:true, opts:shuf(q.opts)})); again = true; } }
+  if (!ok){ S.tries[q.k] = (S.tries[q.k]||0) + 1; if (S.tries[q.k] <= 2){ S.tasks.push(Object.assign({}, q, {again:true}, q.opts ? {opts:shuf(q.opts)} : {}, q.words ? {words:shuf(q.words)} : {})); again = true; } }
   fb.innerHTML = (ok ? `Richtig! <span class="earn">+1 🪙</span>` : `Richtig wäre: <b>${esc(q.a)}</b>${again?' – kommt am Ende nochmal':''}`)
     + `<span class="why">${q.why}</span>`;
   PlayLog.progress(S.res.filter(Boolean).length, S.tasks.length);
