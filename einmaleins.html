@@ -192,7 +192,9 @@ p{margin:0;color:var(--muted);line-height:1.45}
 .sa-tab{border-collapse:collapse;font-family:var(--display);font-weight:800;margin:0 auto}
 .sa-tab th,.sa-tab td{border:2px solid rgba(255,255,255,.7);padding:6px 10px;text-align:center}
 .sa-tab td{color:#ffe27a}
-.sa-tab td.dots{width:62px;max-width:62px;font-size:.95rem;letter-spacing:1px;line-height:1.1;word-break:break-all;vertical-align:top}
+.sa-tab td.dots{width:64px;min-width:64px;height:58px;padding:6px;vertical-align:middle}
+.sa-tab .pl{display:grid;grid-template-columns:repeat(3,13px);gap:4px;justify-content:center}
+.sa-tab .pl i{width:13px;height:13px;border-radius:50%;background:#ffe27a;display:block}
 .sa-mauer{display:flex;flex-direction:column;align-items:center;gap:4px}.sa-mauer div{display:flex;gap:4px}
 .sa-mauer span{min-width:62px;padding:6px 8px;border:2px solid rgba(255,255,255,.7);border-radius:6px;font-family:var(--display);font-weight:800;color:#ffe27a}
 @media (prefers-reduced-motion:reduce){*{animation:none!important}}
@@ -754,7 +756,7 @@ const u100=n=>n<10?E1[n]:n<20?TEEN[n-10]:(n%10?(n%10===1?"ein":E1[n%10])+"und":"
 const W=n=>{const t=Math.floor(n/1000),h=Math.floor(n%1000/100),r=n%100;return((t?(t===1?"ein":u100(t))+"tausend":"")+(h?(h===1?"ein":E1[h])+"hundert":"")+(r?u100(r):""))||"null"};
 
 /* ---------- 1 Zahlenraum 10 000 ---------- */
-const tafel=d=>`<table class="sa-tab"><tr><th>T</th><th>H</th><th>Z</th><th>E</th></tr><tr>${d.map(x=>`<td class="dots">${"●".repeat(x)||"&nbsp;"}</td>`).join("")}</tr></table>`;
+const tafel=d=>`<table class="sa-tab"><tr><th>T</th><th>H</th><th>Z</th><th>E</th></tr><tr>${d.map(x=>`<td class="dots"><span class="pl">${"<i></i>".repeat(x)}</span></td>`).join("")}</tr></table>`;
 function z_darst(){const n=rnd(1000,9999),d=String(n).split("").map(Number),v=rnd(0,3);
  if(v===0)return{prompt:"Welche Zahl ist in der Stellenwerttafel dargestellt?",show:tafel(d),line:[F(n)],why:`${d[0]} T, ${d[1]} H, ${d[2]} Z, ${d[3]} E = ${N(n)}`};
  if(v===1)return{prompt:"Zerlege in Stellenwerte.",line:[`${N(n)} = `,F(d[0])," T + ",F(d[1])," H + ",F(d[2])," Z + ",F(d[3])," E"],why:`${N(n)} = ${d[0]} T + ${d[1]} H + ${d[2]} Z + ${d[3]} E`};
