@@ -30,8 +30,8 @@ header{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .purse.bump{animation:bump .4s}
 @keyframes bump{40%{transform:scale(1.15)}}
 
-nav{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;background:var(--paper);padding:6px;border-radius:16px;border:2px solid var(--line)}
-nav button{padding:10px 4px;border-radius:11px;font-weight:800;color:var(--muted)}
+nav{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;background:var(--paper);padding:6px;border-radius:16px;border:2px solid var(--line)}
+nav button{padding:10px 2px;border-radius:11px;font-weight:800;color:var(--muted);font-size:clamp(.72rem,2.9vw,.95rem);min-width:0;hyphens:manual;line-height:1.1}
 nav button[aria-selected="true"]{background:var(--chalk);color:#fff}
 
 .panel{background:var(--paper);border:2px solid var(--line);border-radius:20px;padding:18px;display:flex;flex-direction:column;gap:14px}
@@ -154,6 +154,47 @@ p{margin:0;color:var(--muted);line-height:1.45}
 .albumhead{font-family:var(--display);font-weight:800;font-size:1.05rem;margin:4px 0 -4px;display:flex;justify-content:space-between;gap:8px}
 .albumhead small{font-family:var(--body);color:var(--muted);font-size:.85rem}
 @media (max-width:420px){.trow{grid-template-columns:3.4rem 1fr auto;padding:6px;gap:6px}.cells i{font-size:0}}
+/* 1. Schularbeit */
+.sa-cd{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;justify-content:space-between}
+.sa-cd p{flex:1 1 220px}
+.sa-cd b{color:var(--ink)}
+.sa-cd label{font-weight:800;font-size:.85rem;color:var(--muted);display:flex;flex-direction:column;gap:2px}
+.sa-cd input{font:inherit;padding:6px 8px;border-radius:10px;border:2px solid var(--line);color:var(--ink);background:#fff}
+#saCards{display:flex;flex-direction:column;gap:12px;margin-top:12px}
+.sa-head{display:flex;gap:10px;align-items:flex-start}
+.sa-head h3{margin:0;font-family:var(--display);font-size:1.15rem;line-height:1.15;flex:1;min-width:0}
+.sa-src{display:block;font-family:var(--body);font-size:.8rem;color:var(--muted);font-weight:700;margin-top:2px}
+.sa-num{width:34px;height:34px;border-radius:10px;background:var(--chalk);color:#fff;display:grid;place-items:center;font-family:var(--display);font-weight:800;flex:none}
+.sa-subs{display:flex;flex-wrap:wrap;gap:6px}
+.sa-subs button{padding:5px 11px;border-radius:999px;border:2px solid var(--line);background:#f4f9ff;font-weight:800;font-size:.85rem}
+.sa-subs button:hover{border-color:var(--chalk)}
+.sa-stars{font-size:1rem;letter-spacing:1px;white-space:nowrap}.sa-stars .off{opacity:.2}.sa-stars.big{font-size:2.4rem;letter-spacing:6px}
+#saBoard .progress{flex-wrap:wrap;max-width:100%}
+#saBoard .progress i{width:11px;height:11px}
+.sa-board{display:flex;flex-direction:column;align-items:center;gap:12px}
+.sa-tag{font-size:.8rem;font-weight:800;color:#ffe27a}
+.sa-prompt{font-family:var(--display);font-weight:800;font-size:1.2rem;line-height:1.25;text-wrap:balance}
+.sa-show{width:100%;display:flex;justify-content:center;min-width:0}
+.sa-svg{width:100%;height:auto;display:block}
+.sa-txt{font-size:1.08rem;font-weight:700;line-height:1.5;max-width:30em}
+.sa-word{font-size:1.25rem;font-weight:800;color:#ffe27a;overflow-wrap:anywhere}
+.sa-big{font-family:var(--display);font-weight:800;font-size:clamp(1.6rem,8vw,2.3rem);font-variant-numeric:tabular-nums}
+.sa-o{color:#ffe27a}
+.sa-line{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px;font-family:var(--display);font-weight:800;font-size:clamp(1.15rem,5vw,1.7rem);font-variant-numeric:tabular-nums}
+.sa-in{font:inherit;color:#ffe27a;background:rgba(255,255,255,.12);border:0;border-bottom:3px dashed rgba(255,255,255,.75);border-radius:8px 8px 0 0;text-align:center;padding:2px 4px;min-width:2.4ch;max-width:8ch}
+.sa-in:focus{outline:3px solid #ffe27a;outline-offset:2px}
+.sa-in.ok{border-bottom:3px solid var(--leaf);color:#9ff0bf}.sa-in.no{border-bottom:3px solid var(--berry);color:#ff9fb3;text-decoration:line-through}
+.sa-ok{flex-basis:100%;max-width:220px;margin:6px auto 0;background:var(--leaf);color:#fff;font-family:var(--display);font-weight:800;font-size:1.1rem;padding:9px 14px;border-radius:12px;box-shadow:0 3px 0 #1f7c4b}
+.sa-opts{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.sa-opt{min-width:64px;padding:10px 14px;border-radius:12px;border:2px solid rgba(255,255,255,.6);background:rgba(255,255,255,.08);color:#fff;font-weight:800;font-size:1.05rem}
+.sa-opt.right{background:var(--leaf);border-color:var(--leaf)}.sa-opt.wrong{background:var(--berry);border-color:var(--berry)}
+.sa-why{display:block;font-weight:600;font-size:.95rem;color:#dbe8f5;margin-top:4px}
+.sa-tab{border-collapse:collapse;font-family:var(--display);font-weight:800;margin:0 auto}
+.sa-tab th,.sa-tab td{border:2px solid rgba(255,255,255,.7);padding:6px 10px;text-align:center}
+.sa-tab td{color:#ffe27a}
+.sa-tab td.dots{width:62px;max-width:62px;font-size:.95rem;letter-spacing:1px;line-height:1.1;word-break:break-all;vertical-align:top}
+.sa-mauer{display:flex;flex-direction:column;align-items:center;gap:4px}.sa-mauer div{display:flex;gap:4px}
+.sa-mauer span{min-width:62px;padding:6px 8px;border:2px solid rgba(255,255,255,.7);border-radius:6px;font-family:var(--display);font-weight:800;color:#ffe27a}
 @media (prefers-reduced-motion:reduce){*{animation:none!important}}
 </style>
 
@@ -166,6 +207,7 @@ p{margin:0;color:var(--muted);line-height:1.45}
 
   <nav role="tablist">
     <button role="tab" data-tab="ueben" aria-selected="true">Rechnen</button>
+    <button role="tab" data-tab="sa" aria-selected="false">Schul&shy;arbeit</button>
     <button role="tab" data-tab="fort" aria-selected="false">Fortschritt</button>
     <button role="tab" data-tab="laden" aria-selected="false">Laden</button>
     <button role="tab" data-tab="album" aria-selected="false">Album</button>
@@ -233,6 +275,22 @@ p{margin:0;color:var(--muted);line-height:1.45}
       <button class="big" id="againBtn" style="align-self:stretch">Noch eine Runde</button>
       <button class="chip" id="toShop">Zum Laden</button>
     </div>
+  </section>
+
+  <!-- 1. Schularbeit -->
+  <section id="sa" hidden>
+    <div id="saMenu">
+      <div class="panel">
+        <div><h2>1. Schularbeit</h2><p>Die 4 Themen vom Stoffblatt. Tippe ein Unterthema an oder übe alles auf einmal.</p></div>
+        <div class="sa-cd"><p id="saCdText"></p><label for="saDate">Datum der Schularbeit<input type="date" id="saDate"></label></div>
+      </div>
+      <div id="saCards"></div>
+    </div>
+    <div class="panel" id="saGame" hidden>
+      <div class="board sa-board" id="saBoard"></div>
+      <button class="chip" id="saQuit" style="align-self:center">Runde beenden</button>
+    </div>
+    <div class="panel" id="saEnd" hidden></div>
   </section>
 
   <!-- Fortschritt -->
@@ -345,7 +403,8 @@ function flyCoin(el){
 document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>showTab(b.dataset.tab));
 function showTab(t){
   document.querySelectorAll("nav button").forEach(b=>b.setAttribute("aria-selected",b.dataset.tab===t));
-  ["ueben","fort","laden","album"].forEach(s=>$(s).hidden=s!==t);
+  ["ueben","sa","fort","laden","album"].forEach(s=>$(s).hidden=s!==t);
+  if(t==="sa"&&$("saGame").hidden)SA_menu();
   if(t==="laden")renderShop();if(t==="album")renderAlbum();if(t==="fort")renderTracker();
 }
 
@@ -354,7 +413,7 @@ function renderPlayers(){
   $("players").innerHTML="";
   Object.keys(db.players).forEach(n=>{
     const b=document.createElement("button");b.textContent=n;b.setAttribute("aria-pressed",n===db.current);
-    b.onclick=()=>{db.current=n;save();renderPlayers();renderHead();renderSlowBtn();PlayLog.refresh();if(!$("fort").hidden)renderTracker()};$("players").appendChild(b);
+    b.onclick=()=>{db.current=n;save();renderPlayers();renderHead();renderSlowBtn();PlayLog.refresh();if(!$("sa").hidden&&$("saGame").hidden)SA_menu();if(!$("fort").hidden)renderTracker()};$("players").appendChild(b);
   });
 }
 $("addForm").onsubmit=e=>{e.preventDefault();const n=$("newName").value.trim();if(!n)return;
@@ -676,6 +735,286 @@ const PlayLog=(function(){
     refresh:renderBox,fmt
   };
 })();
+// ================= 1. Schularbeit =================
+(function(){
+const rnd=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
+const pk=a=>a[Math.floor(Math.random()*a.length)];
+const N=n=>String(n).replace(/\B(?=(\d{3})+(?!\d))/g," ");
+const F=ans=>({ans});
+const cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
+const sum=a=>a.reduce((s,x)=>s+x,0);
+const qsum=n=>sum(String(n).split("").map(Number));
+const LT="&lt;";
+const SV=(w,h,g)=>`<svg class="sa-svg" viewBox="0 0 ${w} ${h}" style="max-width:${Math.round(w*1.3)}px" role="img" aria-label="Zeichnung">${g}</svg>`;
+const TX=(x,y,s,sz=13,col="#fff")=>`<text x="${x}" y="${y}" fill="${col}" font-size="${sz}" font-weight="700" text-anchor="middle" font-family="Nunito,sans-serif">${s}</text>`;
+const TXT=s=>`<div class="sa-txt">${s}</div>`;
+// Zahlwörter
+const E1=["","eins","zwei","drei","vier","fünf","sechs","sieben","acht","neun"],TEEN=["zehn","elf","zwölf","dreizehn","vierzehn","fünfzehn","sechzehn","siebzehn","achtzehn","neunzehn"],TENS=["","","zwanzig","dreißig","vierzig","fünfzig","sechzig","siebzig","achtzig","neunzig"];
+const u100=n=>n<10?E1[n]:n<20?TEEN[n-10]:(n%10?(n%10===1?"ein":E1[n%10])+"und":"")+TENS[Math.floor(n/10)];
+const W=n=>{const t=Math.floor(n/1000),h=Math.floor(n%1000/100),r=n%100;return((t?(t===1?"ein":u100(t))+"tausend":"")+(h?(h===1?"ein":E1[h])+"hundert":"")+(r?u100(r):""))||"null"};
+
+/* ---------- 1 Zahlenraum 10 000 ---------- */
+const tafel=d=>`<table class="sa-tab"><tr><th>T</th><th>H</th><th>Z</th><th>E</th></tr><tr>${d.map(x=>`<td class="dots">${"●".repeat(x)||"&nbsp;"}</td>`).join("")}</tr></table>`;
+function z_darst(){const n=rnd(1000,9999),d=String(n).split("").map(Number),v=rnd(0,3);
+ if(v===0)return{prompt:"Welche Zahl ist in der Stellenwerttafel dargestellt?",show:tafel(d),line:[F(n)],why:`${d[0]} T, ${d[1]} H, ${d[2]} Z, ${d[3]} E = ${N(n)}`};
+ if(v===1)return{prompt:"Zerlege in Stellenwerte.",line:[`${N(n)} = `,F(d[0])," T + ",F(d[1])," H + ",F(d[2])," Z + ",F(d[3])," E"],why:`${N(n)} = ${d[0]} T + ${d[1]} H + ${d[2]} Z + ${d[3]} E`};
+ if(v===2){const parts=shuf([[d[0],"T"],[d[1],"H"],[d[2],"Z"],[d[3],"E"]].filter(p=>p[0]));
+  return{prompt:"Welche Zahl ist das? Achtung, die Reihenfolge ist gemischt!",line:[parts.map(p=>p.join(" ")).join(" + ")+" = ",F(n)],why:`Ordne nach T, H, Z, E: ${N(n)}`};}
+ const t=rnd(1,8),h=rnd(10,19),r=t*1000+h*100;
+ return{prompt:"Bündeln: 10 H sind 1 T.",line:[`${t} T + ${h} H = `,F(r)],why:`${h} H = 1 T ${h-10} H → ${t+1} T ${h-10} H = ${N(r)}`};}
+function z_schreib(){const n=rnd(1001,9999);
+ if(Math.random()<.55)return{prompt:"Schreib das Zahlwort als Zahl.",show:`<div class="sa-word">${W(n)}</div>`,line:[F(n)],why:`${W(n)} = ${N(n)}`};
+ const d=String(n).split(""),alts=new Set();
+ while(alts.size<2){const e=d.slice(),i=rnd(0,2);[e[i],e[i+1]]=[e[i+1],e[i]];const m=+e.join("");
+  if(m!==n&&m>=1000)alts.add(m);else{const k=n+pk([10,100,-10,-100,1000,-1000]);if(k>=1000&&k<=9999)alts.add(k)}}
+ return{prompt:`Wie schreibt man <b>${N(n)}</b> in Worten?`,opts:shuf([n,...alts]).map(W),a:W(n),why:`${N(n)} = ${W(n)}`};}
+function z_raetsel(){const v=rnd(0,2);
+ if(v===0){const t=rnd(1,4),h=t*2,e=t+3,n=t*1000+h*100+e;
+  return{prompt:"Zahlenrätsel",show:TXT(`Ich bin eine vierstellige Zahl. Meine Tausenderziffer ist ${t}. Meine Hunderterziffer ist doppelt so groß. Ich habe keine Zehner. Meine Einerziffer ist um 3 größer als meine Tausenderziffer.`),line:[F(n)],why:`${t} T, ${h} H, 0 Z, ${e} E = ${N(n)}`};}
+ if(v===1){const a=rnd(10,98)*100+rnd(0,99),s=pk([10,100,1000]),up=Math.random()<.5,n=up?a+s:a-s;if(n<1000||n>9999)return z_raetsel();
+  return{prompt:"Zahlenrätsel",show:TXT(`Ich bin um ${N(s)} ${up?"größer":"kleiner"} als ${N(a)}.`),line:[F(n)],why:`${N(a)} ${up?"+":"−"} ${N(s)} = ${N(n)}`};}
+ const dg=shuf([1,2,3,4,5,6,7,8,9]).slice(0,4),big=Math.random()<.5,n=+dg.slice().sort((a,b)=>big?b-a:a-b).join("");
+ return{prompt:"Zahlenrätsel",show:TXT(`Bilde aus den Ziffern <b>${dg.join(", ")}</b> die ${big?"größte":"kleinste"} vierstellige Zahl. Jede Ziffer nur einmal!`),line:[F(n)],why:`${big?"Die größte Ziffer":"Die kleinste Ziffer"} kommt zu den Tausendern: ${N(n)}`};}
+function z_folge(){for(;;){const st=pk([20,50,90,100,110,200,250,500,1000,-50,-100,-200,-500]),a=rnd(5,85)*100+pk([0,0,25,50,7,30]),s=[0,1,2,3,4,5].map(i=>a+i*st);
+ if(s.some(x=>x<0||x>10000))continue;
+ return{prompt:"Setze die Zahlenfolge fort.",line:[s.slice(0,4).map(N).join(", ")+", ",F(s[4]),", ",F(s[5])],why:`Die Regel ist ${st>0?"+":"−"} ${N(Math.abs(st))}.`}}}
+function z_cmp(){const a=rnd(1000,9999),v=rnd(0,3);let b;
+ if(v===0)b=a;else if(v===1){const d=String(a).split(""),i=rnd(1,2);[d[i],d[i+1]]=[d[i+1],d[i]];b=+d.join("")}else b=a+pk([1,-1,10,-10,100,-100,1000,-1000]);
+ if(b<1000||b>9999)b=a;const r=a<b?"<":a>b?">":"=";
+ return{prompt:"Setze ein: &lt;, &gt; oder =",show:`<div class="sa-big">${N(a)} <span class="sa-o">○</span> ${N(b)}</div>`,opts:["<",">","="],a:r,why:`${N(a)} ${esc(r)} ${N(b)}`};}
+function z_strahl(){const u=pk([1,10,100]),s=Math.floor(rnd(0,10000-20*u)/(10*u))*10*u;let i;do i=rnd(1,19);while(i===10);const n=s+i*u;
+ let g=`<line x1="12" y1="40" x2="308" y2="40" stroke="#fff" stroke-width="2"/>`;
+ for(let k=0;k<=20;k++){const x=20+k*14,h=k%10===0?12:k%5===0?8:5;g+=`<line x1="${x}" y1="${40-h}" x2="${x}" y2="${40+h}" stroke="#fff" stroke-width="${k%10===0?2.2:1.2}"/>`;if(k%10===0)g+=TX(x,70,N(s+k*u),12)}
+ const x=20+i*14;g+=`<path d="M${x} 27 L${x-6} 12 L${x+6} 12 Z" fill="#ffe27a"/>`;
+ return{prompt:"Welche Zahl zeigt der Pfeil?",show:SV(320,80,g),line:[F(n)],why:`Ein kleiner Strich ist ${N(u)}. ${N(s)} + ${i} · ${N(u)} = ${N(n)}`};}
+function z_vn(){const v=rnd(0,4);let n=rnd(1001,9998);
+ if(v===0)return{prompt:"Wie heißen Vorgänger und Nachfolger?",line:[F(n-1),` ${LT} ${N(n)} ${LT} `,F(n+1)],why:`Vorgänger ${N(n-1)} · Nachfolger ${N(n+1)}`};
+ const u=v===4?pk([10,100,1000]):[10,100,1000][v-1],nm={10:"Zehner",100:"Hunderter",1000:"Tausender"}[u];
+ while(n%u===0||(n%u)*2===u)n++;
+ const lo=n-n%u,hi=lo+u;
+ if(v<4)return{prompt:`Wie heißen die Nachbar-${nm}?`,line:[F(lo),` ${LT} ${N(n)} ${LT} `,F(hi)],why:`${N(lo)} ${LT} ${N(n)} ${LT} ${N(hi)}`};
+ const near=n-lo<hi-n?lo:hi;
+ return{prompt:`Welcher Nachbar-${nm} liegt näher an <b>${N(n)}</b>?`,opts:[N(lo),N(hi)],a:N(near),why:`${N(n)} ist nur ${N(Math.abs(n-near))} von ${N(near)} entfernt.`};}
+function z_qs(){const n=rnd(1000,9999);
+ if(Math.random()<.6)return{prompt:"Berechne die Ziffernsumme.",show:`<div class="sa-big">${N(n)}</div>`,line:[String(n).split("").join(" + ")+" = ",F(qsum(n))],why:`${String(n).split("").join(" + ")} = ${qsum(n)}`};
+ const t=rnd(10,26),mk=ok=>{for(;;){const m=rnd(1000,9999);if((qsum(m)===t)===ok)return m}},r=mk(true),o=new Set([r]);while(o.size<4)o.add(mk(false));
+ return{prompt:`Welche Zahl hat die Ziffernsumme <b>${t}</b>?`,opts:shuf([...o]).map(N),a:N(r),why:`${String(r).split("").join(" + ")} = ${t}`};}
+
+/* ---------- 2 Länge + Sachrechnen ---------- */
+const ITEMS=[["Ein Bleistift ist ungefähr","lang",15,"cm"],["Eine Zimmertür ist ungefähr","hoch",2,"m"],["Eine Ameise ist ungefähr","lang",5,"mm"],["Ein Fußballfeld ist ungefähr","lang",100,"m"],["Von Graz nach Wien sind es ungefähr","",200,"km"],["Ein Schulheft ist ungefähr","lang",30,"cm"],["Ein Klassenzimmer ist ungefähr","lang",9,"m"],["Ein Marienkäfer ist ungefähr","lang",7,"mm"],["Ein Linienbus ist ungefähr","lang",12,"m"],["Ein Esstisch ist ungefähr","hoch",75,"cm"],["Ein Reiskorn ist ungefähr","lang",6,"mm"],["Der Weg rund um einen großen See ist ungefähr","lang",4,"km"],["Ein Kugelschreiber ist ungefähr","lang",14,"cm"],["Ein Elefant ist ungefähr","hoch",3,"m"]];
+function l_schaetz(){const [a,b,v,u]=pk(ITEMS),bb=b?" "+b:"";
+ if(Math.random()<.5)return{prompt:"Schätze! Was passt?",show:TXT(`${a} …${bb}`),opts:["mm","cm","m","km"].map(x=>`${v} ${x}`),a:`${v} ${u}`,why:`${a} ${v} ${u}${bb}.`};
+ return{prompt:"Welche Längeneinheit passt?",show:TXT(`${a} ${v} ___${bb}.`),opts:["mm","cm","m","km"],a:u,why:`${a} ${v} ${u}${bb}.`};}
+function l_umw(){const v=rnd(0,6);let a,b,c;
+ switch(v){
+ case 0:a=rnd(1,9);b=rnd(1,99);return{prompt:"Wandle um.",line:[`${a} m ${b} cm = `,F(a*100+b)," cm"],why:`1 m = 100 cm → ${a} m = ${a*100} cm, dazu ${b} cm = ${a*100+b} cm`};
+ case 1:c=rnd(101,999);return{prompt:"Wandle um.",line:[`${c} cm = `,F(Math.floor(c/100))," m ",F(c%100)," cm"],why:`100 cm = 1 m → ${c} cm = ${Math.floor(c/100)} m ${c%100} cm`};
+ case 2:a=rnd(1,9);b=rnd(1,199)*5;return{prompt:"Wandle um.",line:[`${a} km ${b} m = `,F(a*1000+b)," m"],why:`1 km = 1 000 m → ${N(a*1000)} m + ${b} m = ${N(a*1000+b)} m`};
+ case 3:c=rnd(1001,9999);return{prompt:"Wandle um.",line:[`${N(c)} m = `,F(Math.floor(c/1000))," km ",F(c%1000)," m"],why:`1 000 m = 1 km → ${N(c)} m = ${Math.floor(c/1000)} km ${c%1000} m`};
+ case 4:a=rnd(1,30);b=rnd(1,9);return{prompt:"Wandle um.",line:[`${a} cm ${b} mm = `,F(a*10+b)," mm"],why:`1 cm = 10 mm → ${a*10} mm + ${b} mm = ${a*10+b} mm`};
+ case 5:a=rnd(2,9);return{prompt:"Wandle um.",line:[`${a} dm = `,F(a*10)," cm"],why:"1 dm = 10 cm"};
+ default:a=rnd(2,9);return{prompt:"Wandle um.",line:[`${a} m = `,F(a*10)," dm"],why:"1 m = 10 dm"};}}
+function l_ergaenz(){const v=rnd(0,2);
+ if(v===0){const x=rnd(5,95);return{prompt:"Ergänze auf 1 m.",line:[`${x} cm + `,F(100-x)," cm = 1 m"],why:`1 m = 100 cm. 100 − ${x} = ${100-x}`};}
+ if(v===1){const x=rnd(1,199)*5;return{prompt:"Ergänze auf 1 km.",line:[`${x} m + `,F(1000-x)," m = 1 km"],why:`1 km = 1 000 m. 1 000 − ${x} = ${1000-x}`};}
+ const x=rnd(1,9);return{prompt:"Ergänze auf 1 cm.",line:[`${x} mm + `,F(10-x)," mm = 1 cm"],why:"1 cm = 10 mm"};}
+function l_rechnen(){const v=rnd(0,3);
+ if(v===0){const a=rnd(1,4),b=rnd(1,9)*10,c=rnd(1,9)*5;return{prompt:"Rechne in cm.",line:[`${a} m ${b} cm + ${c} cm = `,F(a*100+b+c)," cm"],why:`${a} m ${b} cm = ${a*100+b} cm, + ${c} = ${a*100+b+c} cm`};}
+ if(v===1){const a=rnd(2,6),b=rnd(2,18)*50,c=rnd(4,30)*50;return{prompt:"Rechne in m.",line:[`${a} km ${b} m − ${N(c)} m = `,F(a*1000+b-c)," m"],why:`${a} km ${b} m = ${N(a*1000+b)} m, − ${N(c)} = ${N(a*1000+b-c)} m`};}
+ if(v===2){const k=rnd(2,6),x=rnd(3,19)*5;return{prompt:"Rechne.",line:[`${k} · ${x} cm = `,F(k*x)," cm"],why:`${k} · ${x} = ${k*x}`};}
+ const x=rnd(2,19)*5;return{prompt:"Rechne.",line:[`1 m − ${x} cm = `,F(100-x)," cm"],why:`1 m = 100 cm → 100 − ${x} = ${100-x}`};}
+const TRIPS=[[["Arnfels","Leibnitz","Graz"],[21,37]],[["Graz","Wien","Linz"],[197,185]],[["Wien","Linz","Salzburg"],[185,136]],[["Klagenfurt","Graz","Wien"],[137,197]],[["Linz","Salzburg","Innsbruck"],[136,187]]];
+function l_sach(){const v=rnd(0,4);
+ if(v===0){const d=rnd(9,19)*50,t=5;return{prompt:"Sachaufgabe",show:TXT(`Lenas Schulweg ist ${N(d)} m lang. Sie geht ihn jeden Tag hin und zurück. Wie viele Meter geht sie an ${t} Schultagen?`),line:[F(d*2*t)," m"],why:`${N(d)} m · 2 = ${N(d*2)} m pro Tag, · ${t} = ${N(d*2*t)} m`};}
+ if(v===1){const [c,k]=pk(TRIPS),s=k[0]+k[1];return{prompt:"Routenplaner",show:TXT(`Familie Huber fährt von ${c[0]} über ${c[1]} nach ${c[2]}.<br>${c[0]} – ${c[1]}: ${k[0]} km · ${c[1]} – ${c[2]}: ${k[1]} km`),line:["Hinfahrt: ",F(s)," km · hin und zurück: ",F(2*s)," km"],why:`${k[0]} + ${k[1]} = ${s} km, hin und zurück ${s} · 2 = ${2*s} km`};}
+ if(v===2){let m;do m=rnd(1100,9900);while(m%1000===500);const r=Math.round(m/1000);return{prompt:"Runde auf ganze Kilometer.",show:`<div class="sa-big">${N(m)} m</div>`,line:["≈ ",F(r)," km"],why:`${N(m)} m liegt näher bei ${r} km. Ab 500 m wird aufgerundet.`};}
+ if(v===3){const n=rnd(2,5),p=rnd(3,9)*10+5,L=Math.ceil((n*p+50)/100)+rnd(0,2),r=L*100-n*p;return{prompt:"Sachaufgabe",show:TXT(`Ein Seil ist ${L} m lang. Paul schneidet ${n} Stücke zu je ${p} cm ab. Wie viele cm bleiben übrig?`),line:[F(r)," cm"],why:`${L} m = ${L*100} cm. ${n} · ${p} = ${n*p} cm. ${L*100} − ${n*p} = ${r} cm`};}
+ const r=rnd(4,9),len=pk([250,400]),tot=r*len;return{prompt:"Sachaufgabe",show:TXT(`Lea läuft ${r} Runden um den Sportplatz. Eine Runde ist ${len} m lang. Wie weit läuft sie?`),line:[F(Math.floor(tot/1000))," km ",F(tot%1000)," m"],why:`${r} · ${len} m = ${N(tot)} m = ${Math.floor(tot/1000)} km ${tot%1000} m`};}
+
+/* ---------- 3 Geometrie ---------- */
+function iso(hs){const s=22,ox=30,oy=96,P=(x,y,z)=>[ox+(x-y)*s*.87+s*.87,oy+(x+y)*s*.5-z*s];
+ const poly=(pts,f)=>`<polygon points="${pts.map(p=>p.map(v=>v.toFixed(1)).join(",")).join(" ")}" fill="${f}" stroke="#24496e" stroke-width="1.5"/>`;
+ let g="";hs.forEach((h,x)=>{for(let z=0;z<h;z++){
+  g+=poly([P(x,1,z),P(x+1,1,z),P(x+1,1,z+1),P(x,1,z+1)],"#f5b301");
+  g+=poly([P(x+1,0,z),P(x+1,1,z),P(x+1,1,z+1),P(x+1,0,z+1)],"#c98a00");
+  g+=poly([P(x,0,z+1),P(x+1,0,z+1),P(x+1,1,z+1),P(x,1,z+1)],"#ffe27a");}});return g;}
+function g_wuerfel(){const v=rnd(0,2);
+ if(v===0){const hs=[...Array(rnd(3,5))].map(()=>rnd(1,3)),s=sum(hs);return{prompt:"Wie viele Würfel sind es?",show:SV(180,175,iso(hs)),line:[F(s)," Würfel"],why:`Zähle Turm für Turm: ${hs.join(" + ")} = ${s}`};}
+ let h;do h=[...Array(9)].map(()=>rnd(0,3));while(sum(h)<6||sum(h)>24);const s=sum(h);
+ let g="";h.forEach((n,i)=>{const x=5+(i%3)*50,y=5+Math.floor(i/3)*50;g+=`<rect x="${x}" y="${y}" width="50" height="50" fill="${n?`rgba(255,226,122,${(n*.18).toFixed(2)})`:"none"}" stroke="#fff" stroke-width="2"/>`+(n?TX(x+25,y+33,n,20):"")});
+ const plan=SV(160,160,g);
+ if(v===1)return{prompt:"Bauplan: Die Zahl sagt, wie viele Würfel übereinander stehen. Wie viele Würfel sind es?",show:plan,line:[F(s)," Würfel"],why:`${h.filter(Boolean).join(" + ")} = ${s}`};
+ return{prompt:"Bauplan: Wie viele Würfel fehlen noch, damit ein großer Würfel aus 3 · 3 · 3 = 27 Würfeln entsteht?",show:plan,line:[F(27-s)," Würfel"],why:`Gebaut sind ${s} Würfel. 27 − ${s} = ${27-s}`};}
+function g_sym(){const v=rnd(0,2);
+ if(v===0){const c=26,cells=new Set();while(cells.size<7)cells.add(rnd(0,3)+","+rnd(0,5));
+  const full=[...cells].flatMap(k=>{const [x,y]=k.split(",").map(Number);return[[x,y],[7-x,y]]}),symm=Math.random()<.5;
+  if(!symm){const p=pk(full.filter(q=>q[0]>=4));let np;do np=[rnd(4,7),rnd(0,5)];while(full.some(q=>q[0]===np[0]&&q[1]===np[1]));p[0]=np[0];p[1]=np[1];}
+  let g="";for(let i=0;i<=8;i++)g+=`<line x1="${2+i*c}" y1="2" x2="${2+i*c}" y2="${2+6*c}" stroke="rgba(255,255,255,.25)"/>`;for(let j=0;j<=6;j++)g+=`<line x1="2" y1="${2+j*c}" x2="${2+8*c}" y2="${2+j*c}" stroke="rgba(255,255,255,.25)"/>`;
+  full.forEach(([x,y])=>g+=`<rect x="${2+x*c}" y="${2+y*c}" width="${c}" height="${c}" fill="#ffe27a"/>`);
+  g+=`<line x1="${2+4*c}" y1="0" x2="${2+4*c}" y2="${4+6*c}" stroke="#ff6b8a" stroke-width="3" stroke-dasharray="6 4"/>`;
+  return{prompt:"Ist die Figur symmetrisch zur roten Spiegelachse?",show:SV(8*c+4,6*c+4,g),opts:["ja","nein"],a:symm?"ja":"nein",why:symm?"Jedes Kästchen hat sein Spiegelbild auf der anderen Seite.":"Rechts ist ein Kästchen an der falschen Stelle."};}
+ if(v===1){const r=pk("AHIMOTUVWXY".split(""));return{prompt:"Welcher Buchstabe hat eine senkrechte Spiegelachse?",opts:shuf([r,...shuf("FGJLNPRSZ".split("")).slice(0,3)]),a:r,why:`${r} sieht gespiegelt genau gleich aus.`};}
+ const d=rnd(2,6),c=20;let g="";for(let i=0;i<=14;i++)g+=`<line x1="${2+i*c}" y1="2" x2="${2+i*c}" y2="${2+4*c}" stroke="rgba(255,255,255,.25)"/>`;for(let j=0;j<=4;j++)g+=`<line x1="2" y1="${2+j*c}" x2="${2+14*c}" y2="${2+j*c}" stroke="rgba(255,255,255,.25)"/>`;
+ g+=`<line x1="${2+7*c}" y1="0" x2="${2+7*c}" y2="${4+4*c}" stroke="#ff6b8a" stroke-width="3" stroke-dasharray="6 4"/><circle cx="${2+(7-d)*c}" cy="${2+2*c}" r="6" fill="#ffe27a"/>`;
+ return{prompt:`Der Punkt liegt ${d} Kästchen links von der Spiegelachse. Wie weit ist er von seinem Spiegelbild entfernt?`,show:SV(14*c+4,4*c+4,g),line:[F(2*d)," Kästchen"],why:`Das Spiegelbild liegt auch ${d} Kästchen von der Achse entfernt: ${d} + ${d} = ${2*d}`};}
+const ICONS=[["⭐","Stern"],["🍎","Apfel"],["🐟","Fisch"],["🚗","Auto"],["🌻","Blume"],["🎈","Ballon"],["🏠","Haus"],["🐸","Frosch"]];
+function g_koord(){const c=36,L="ABCDEF",items=shuf(ICONS).slice(0,4),pos=[];
+ while(pos.length<4){const p=[rnd(0,5),rnd(0,5)];if(!pos.some(q=>q[0]===p[0]&&q[1]===p[1]))pos.push(p)}
+ const nm=p=>L[p[0]]+(p[1]+1);let g="";
+ for(let i=0;i<6;i++)g+=TX(30+i*c+c/2,16,L[i],13,"#ffe27a")+TX(15,22+i*c+c/2+5,i+1,13,"#ffe27a");
+ for(let i=0;i<=6;i++)g+=`<line x1="${30+i*c}" y1="22" x2="${30+i*c}" y2="${22+6*c}" stroke="rgba(255,255,255,.55)"/><line x1="30" y1="${22+i*c}" x2="${30+6*c}" y2="${22+i*c}" stroke="rgba(255,255,255,.55)"/>`;
+ pos.forEach((p,i)=>g+=`<text x="${30+p[0]*c+c/2}" y="${22+p[1]*c+c/2+8}" font-size="22" text-anchor="middle">${items[i][0]}</text>`);
+ const svg=SV(30+6*c+4,22+6*c+4,g),k=rnd(0,3);
+ if(Math.random()<.5){const a=nm(pos[k]),o=new Set();pos.forEach(p=>o.add(nm(p)));o.add(L[pos[k][1]]+(pos[k][0]+1));o.delete(a);
+  return{prompt:`In welchem Feld liegt ${items[k][0]}?`,show:svg,opts:[a,...shuf([...o]).slice(0,3)].sort(),a,why:`Zuerst die Spalte (Buchstabe), dann die Zeile (Zahl): ${nm(pos[k])}`,fix:true};}
+ return{prompt:`Was liegt im Feld <b>${nm(pos[k])}</b>?`,show:svg,opts:items.map(x=>x.join(" ")),a:items[k].join(" "),why:`Spalte ${L[pos[k][0]]}, Zeile ${pos[k][1]+1}: ${items[k][1]}`};}
+function g_geo(){
+ if(Math.random()<.7){const kind=pk(["parallel","senkrecht","weder noch"]),th=rnd(0,170)*Math.PI/180,cx=160,cy=90,L=70;
+  const seg=(x,y,a,col)=>`<line x1="${(x-Math.cos(a)*L).toFixed(1)}" y1="${(y-Math.sin(a)*L).toFixed(1)}" x2="${(x+Math.cos(a)*L).toFixed(1)}" y2="${(y+Math.sin(a)*L).toFixed(1)}" stroke="${col}" stroke-width="3.5" stroke-linecap="round"/>`;
+  let g;
+  if(kind==="parallel"){const nx=-Math.sin(th)*22,ny=Math.cos(th)*22;g=seg(cx+nx,cy+ny,th,"#fff")+seg(cx-nx,cy-ny,th,"#ffe27a");}
+  else if(kind==="senkrecht"){const t=rnd(-35,35);g=seg(cx,cy,th,"#fff")+seg(cx+Math.cos(th)*t,cy+Math.sin(th)*t,th+Math.PI/2,"#ffe27a");}
+  else{const d=pk([1,-1])*rnd(25,60)*Math.PI/180;g=seg(cx-25,cy,th,"#fff")+seg(cx+25,cy,th+d,"#ffe27a");}
+  return{prompt:"Wie liegen die beiden Linien zueinander?",show:SV(320,180,g),opts:["parallel","senkrecht","weder noch"],a:kind,fix:true,why:{parallel:"Parallele Linien haben überall den gleichen Abstand und treffen sich nie.",senkrecht:"Senkrechte Linien bilden einen rechten Winkel. Prüfe mit dem Geodreieck!","weder noch":"Die Linien sind nicht parallel und bilden keinen rechten Winkel."}[kind]};}
+ const f=pk([["ein Quadrat",4],["ein Rechteck",4],["ein Dreieck mit einem rechten Winkel",1],["ein Kreis",0]]);
+ return{prompt:"Rechte Winkel",show:TXT(`Wie viele rechte Winkel hat ${f[0]}?`),line:[F(f[1])," rechte Winkel"],why:`${cap(f[0])} hat ${f[1]} rechte Winkel.`};}
+const BOD=[["Würfel",8,12,6],["Quader",8,12,6],["Pyramide",5,8,5]];
+const DESC=[["Ich habe keine Ecken und keine Kanten und kann in alle Richtungen rollen.","Kugel"],["Meine 2 Grundflächen sind Kreise und ich kann rollen.","Zylinder"],["Ich habe eine Spitze und einen Kreis als Grundfläche.","Kegel"],["Alle meine 6 Flächen sind gleich große Quadrate.","Würfel"],["Ich habe 6 Flächen. Es sind Rechtecke.","Quader"],["Ich habe ein Quadrat als Grundfläche und 4 Dreiecke.","Pyramide"]];
+function g_koerper(){const v=rnd(0,2);
+ if(v===0){const b=pk(BOD),w=rnd(0,2),nm=["Ecken","Kanten","Flächen"][w];return{prompt:"Körper",show:TXT(`Wie viele <b>${nm}</b> hat ${b[0]==="Pyramide"?"eine quadratische Pyramide":"ein "+b[0]}?`),line:[F(b[w+1])," "+nm],why:`${b[0]}: ${b[1]} Ecken, ${b[2]} Kanten, ${b[3]} Flächen`};}
+ if(v===1){const d=pk(DESC),all=["Kugel","Zylinder","Kegel","Würfel","Quader","Pyramide"];return{prompt:"Welcher Körper bin ich?",show:TXT(d[0]),opts:shuf([d[1],...shuf(all.filter(x=>x!==d[1])).slice(0,3)]),a:d[1],why:`${d[1]}: ${d[0]}`};}
+ const sh=pk(["Quadrat","Rechteck","Dreieck","Kreis"]),st='fill="rgba(255,226,122,.35)" stroke="#fff" stroke-width="3"';
+ const g={Quadrat:`<rect x="105" y="20" width="110" height="110" ${st}/>`,Rechteck:`<rect x="60" y="40" width="200" height="80" ${st}/>`,Dreieck:`<polygon points="160,18 260,132 60,132" ${st}/>`,Kreis:`<circle cx="160" cy="75" r="58" ${st}/>`}[sh];
+ return{prompt:"Wie heißt diese Fläche?",show:SV(320,150,g),opts:["Quadrat","Rechteck","Dreieck","Kreis"],a:sh,fix:true,why:{Quadrat:"4 gleich lange Seiten und 4 rechte Winkel.",Rechteck:"Gegenüberliegende Seiten sind gleich lang, 4 rechte Winkel.",Dreieck:"3 Seiten und 3 Ecken.",Kreis:"Keine Ecken, überall gleich weit vom Mittelpunkt."}[sh]};}
+
+/* ---------- 4 Grundrechnungsarten ---------- */
+const H=x=>Math.round(x/100)*100;
+function r_addsub(){const v=rnd(0,3);
+ if(v===0){const a=rnd(1000,6999),b=rnd(150,2999);return{prompt:"Addiere schriftlich.",line:[`${N(a)} + ${N(b)} = `,F(a+b)],why:`Überschlag: ${N(H(a))} + ${N(H(b))} = ${N(H(a)+H(b))}`};}
+ if(v===1){const a=rnd(2000,9999),b=rnd(150,a-500);return{prompt:"Subtrahiere schriftlich.",line:[`${N(a)} − ${N(b)} = `,F(a-b)],why:`Probe: ${N(a-b)} + ${N(b)} = ${N(a)}`};}
+ if(v===2){const x=rnd(1,98)*10+pk([0,0,5,3,7]);return{prompt:"Ergänze auf 1 000.",line:[`${x} + `,F(1000-x),` = 1 000`],why:`1 000 − ${x} = ${1000-x}`};}
+ const b=[rnd(50,400),rnd(50,400),rnd(50,400)],m=[b[0]+b[1],b[1]+b[2]],t=m[0]+m[1];
+ return{prompt:"Zahlenmauer: Zwei Steine nebeneinander ergeben zusammen den Stein darüber.",show:`<div class="sa-mauer"><div><span>?</span></div><div><span>&nbsp;</span><span>&nbsp;</span></div><div>${b.map(x=>`<span>${x}</span>`).join("")}</div></div>`,line:["Oberster Stein: ",F(t)],why:`Mitte: ${m[0]} und ${m[1]}, oben: ${m[0]} + ${m[1]} = ${t}`};}
+function r_mul(){const v=rnd(0,3);
+ if(v===0){const a=rnd(102,999),b=rnd(3,9);return{prompt:"Multipliziere schriftlich.",line:[`${a} · ${b} = `,F(a*b)],why:`Überschlag: ${H(a)} · ${b} = ${N(H(a)*b)}`};}
+ if(v===1){const a=rnd(102,2500),z=rnd(2,9)*10;return{prompt:"Multipliziere mit der Zehnerzahl.",line:[`${N(a)} · ${z} = `,F(a*z)],why:`${N(a)} · ${z/10} = ${N(a*z/10)}, Null anhängen: ${N(a*z)}`};}
+ if(v===2){const a=pk([rnd(21,99),rnd(102,999)]);let b=rnd(12,98);while(b%10===0)b++;const t=b-b%10,e=b%10;
+  return{prompt:"Multipliziere mit der zweistelligen Zahl.",line:[`${N(a)} · ${b} = `,F(a*b)],why:`${N(a)} · ${t} = ${N(a*t)}, ${N(a)} · ${e} = ${N(a*e)}, zusammen ${N(a*b)}`};}
+ const n=rnd(3,9),a=rnd(110,999);return{prompt:`Berechne das ${n}-Fache.`,line:[`das ${n}-Fache von ${a} = `,F(a*n)],why:`${a} · ${n} = ${N(a*n)}`};}
+function r_div(){const v=rnd(0,4);
+ if(v<=1){const d=rnd(2,9),n=rnd(100,999),q=Math.floor(n/d),r=n%d;return{prompt:"Dividiere schriftlich. Gibt es einen Rest? (Kein Rest: 0)",line:[`${n} : ${d} = `,F(q)," Rest ",F(r)],why:`Probe: ${q} · ${d}${r?` + ${r}`:""} = ${n}`};}
+ if(v===2){const d=rnd(2,9)*10,q=rnd(2,9)*pk([1,1,10]),n=q*d;if(n>9000)return r_div();return{prompt:"Dividiere durch die Zehnerzahl.",line:[`${N(n)} : ${d} = `,F(q)],why:`weil ${q} · ${d} = ${N(n)}`};}
+ if(v===3){const n=rnd(50,499)*2;return{prompt:"Halbiere.",line:[`Die Hälfte von ${n} ist `,F(n/2)],why:`${n} : 2 = ${n/2}`};}
+ const k=rnd(3,9),x=rnd(21,150);
+ return Math.random()<.5?{prompt:"Zahlenrätsel",show:TXT(`Multiplizierst du meine Zahl mit ${k}, dann erhältst du ${N(k*x)}.`),line:["Meine Zahl: ",F(x)],why:`Umkehraufgabe: ${N(k*x)} : ${k} = ${x}`}
+  :{prompt:"Zahlenrätsel",show:TXT(`Dividierst du meine Zahl durch ${k}, dann erhältst du ${x}.`),line:["Meine Zahl: ",F(k*x)],why:`Umkehraufgabe: ${x} · ${k} = ${N(k*x)}`};}
+function r_check(){const v=rnd(0,4);
+ if(v===0){const a=rnd(95,499),b=rnd(2,9),p=a*b;let c=H(p);if(Math.random()<.25||c===p)c=p;const r=p<c?"<":p>c?">":"=";
+  return{prompt:"&lt;, &gt; oder =? Mach zuerst einen Überschlag.",show:`<div class="sa-big">${a} · ${b} <span class="sa-o">○</span> ${N(c)}</div>`,opts:["<",">","="],a:r,fix:true,why:`${a} · ${b} = ${N(p)}`};}
+ if(v===1){const a=rnd(102,999),b=rnd(3,9),p=a*b,ok=Math.random()<.5,sh=ok?p:p+pk([10,-10,100,-100,1,-1,20]);
+  return{prompt:"Stimmt die Rechnung? Prüfe mit einem Überschlag.",show:`<div class="sa-big">${a} · ${b} = ${N(sh)}</div>`,opts:["stimmt","stimmt nicht"],a:ok?"stimmt":"stimmt nicht",fix:true,why:`Richtig ist ${a} · ${b} = ${N(p)}`};}
+ if(v===2){const n=pk([12,18,24,30,36,42,48,56,60,63,64,72,81,84,90,96]),k=rnd(2,9),ok=n%k===0;
+  return{prompt:"Teiler",show:TXT(`Ist <b>${k}</b> ein Teiler von <b>${n}</b>?`),opts:["ja","nein"],a:ok?"ja":"nein",fix:true,why:ok?`${n} : ${k} = ${n/k}, ohne Rest.`:`${n} : ${k} = ${Math.floor(n/k)} Rest ${n%k}`};}
+ if(v===3){const n=pk([24,36,48,56,60,72,84,90]),dv=[2,3,4,5,6,7,8,9],no=pk(dv.filter(k=>n%k));
+  return{prompt:`Welche Zahl ist <b>kein</b> Teiler von <b>${n}</b>?`,opts:shuf([no,...shuf(dv.filter(k=>n%k===0)).slice(0,3)]).map(String),a:String(no),why:`${n} : ${no} geht nicht ohne Rest.`};}
+ const k=rnd(3,9),m=k*rnd(3,12),o=new Set();while(o.size<3){const x=rnd(10,110);if(x%k)o.add(x)}
+ return{prompt:`Welche Zahl ist ein Vielfaches von <b>${k}</b>?`,opts:shuf([m,...o]).map(String),a:String(m),why:`${m} = ${m/k} · ${k}`};}
+const PLAN={Merkur:58,Venus:108,Erde:150,Mars:228,Jupiter:778,Saturn:1443,Uranus:2872,Neptun:4495};
+const SPORT=[["Fußball",247649],["Tennis",196697],["Schilauf",136356],["Golf",121649],["Turnen",97686],["Klettern",89396],["Eis- und Stocksport",73122],["Pferdesport",48866],["Radsport",48141],["Leichtathletik",32068]];
+function diagramm(){const cats=shuf(["Pizza","Nudeln","Schnitzel","Pommes","Salat","Suppe"]).slice(0,4),val=cats.map(()=>rnd(1,12)*5),x0=34,base=170;let g="";
+ for(let y=0;y<=60;y+=5){const yy=base-y*2.5;g+=`<line x1="${x0}" y1="${yy}" x2="${x0+256}" y2="${yy}" stroke="rgba(255,255,255,${y%10?.12:.3})"/>`+(y%10?"":TX(x0-14,yy+4,y,11))}
+ cats.forEach((c,i)=>{const x=x0+10+i*64,h=val[i]*2.5;g+=`<rect x="${x}" y="${base-h}" width="44" height="${h}" fill="#ffe27a"/>`+TX(x+22,base+16,c,11)});
+ const svg=SV(300,192,g),v=rnd(0,2);let i=rnd(0,3),j;do j=rnd(0,3);while(j===i);
+ if(v===0)return{prompt:"Lies im Diagramm ab: Lieblingsspeisen einer Schule",show:svg,line:[`${cats[i]}: `,F(val[i])," Kinder"],why:`Der Balken von ${cats[i]} reicht bis ${val[i]}.`};
+ if(v===1){if(val[i]===val[j])return diagramm();if(val[i]<val[j])[i,j]=[j,i];return{prompt:"Lies im Diagramm ab und rechne.",show:svg,line:[`${cats[i]} mögen um `,F(val[i]-val[j]),` Kinder mehr als ${cats[j]}.`],why:`${val[i]} − ${val[j]} = ${val[i]-val[j]}`};}
+ const mx=Math.max(...val);if(val.filter(x=>x===mx).length>1)return diagramm();
+ return{prompt:"Welche Speise ist am beliebtesten?",show:svg,opts:cats.slice(),a:cats[val.indexOf(mx)],fix:true,why:`Der höchste Balken: ${cats[val.indexOf(mx)]} mit ${mx} Kindern.`};}
+function r_sach(){const v=rnd(0,6);
+ if(v===0){const c=rnd(30,49)*10+pk([0,8,4]),t=rnd(2,4);return{prompt:"Sachaufgabe",show:TXT(`Ein Railjet kann ${c} Personen befördern. Jeden Tag fährt er ${t}-mal von Salzburg nach Wien. Wie viele Personen können in einer Woche mitfahren?`),line:[F(c*t*7)," Personen"],why:`${c} · ${t} = ${N(c*t)} pro Tag, · 7 Tage = ${N(c*t*7)}`};}
+ if(v===1){if(Math.random()<.3)return{prompt:"Zufall mit zwei Würfeln",show:TXT("Welche Augensumme kommt mit zwei Würfeln am häufigsten vor?"),opts:["2","7","10","12"],a:"7",fix:true,why:"Für 7 gibt es 6 Möglichkeiten: 1+6, 2+5, 3+4, 4+3, 5+2, 6+1."};
+  const s=rnd(2,12),list=[];for(let a=1;a<=6;a++){const b=s-a;if(b>=1&&b<=6)list.push(`${a}+${b}`)}
+  return{prompt:"Zufall mit zwei Würfeln",show:TXT(`Ein roter und ein blauer Würfel. Wie viele Möglichkeiten gibt es, die Augensumme <b>${s}</b> zu würfeln?`),line:[F(list.length)," Möglichkeiten"],why:`rot+blau: ${list.join(", ")}`};}
+ if(v===2)return diagramm();
+ if(v===3){const ks=Object.keys(PLAN);let a,b;do{a=pk(ks);b=pk(ks)}while(a===b);if(PLAN[a]<PLAN[b])[a,b]=[b,a];
+  return{prompt:"Sachrechnen: Planeten",show:`<div><table class="sa-tab"><tr><th>Planet</th><th>Entfernung zur Sonne<br>in Millionen km</th></tr>${[a,b].map(p=>`<tr><td>${p}</td><td>${N(PLAN[p])}</td></tr>`).join("")}</table>${TXT(`Wie viele Millionen km ist ${a} weiter von der Sonne entfernt als ${b}?`)}</div>`,line:[F(PLAN[a]-PLAN[b])," Millionen km"],why:`${N(PLAN[a])} − ${N(PLAN[b])} = ${N(PLAN[a]-PLAN[b])}`};}
+ if(v===4){const [s,n]=pk(SPORT),r=Math.round(n/1000)*1000;return{prompt:"Runde auf Tausender.",show:TXT(`${s} hat in Österreich <b>${N(n)}</b> Mitglieder.`),line:["≈ ",F(r)," Mitglieder"],why:`Die Hunderterziffer ist ${Math.floor(n%1000/100)}: ${Math.floor(n%1000/100)>=5?"aufrunden":"abrunden"} auf ${N(r)}`};}
+ if(v===5){const [a,b,k]=pk([[4,6,12],[6,8,24],[6,10,30],[4,10,20],[3,5,15],[6,9,18]]);return{prompt:"Sachaufgabe",show:TXT(`Anna geht jeden ${a}. Tag ins Kino, Markus jeden ${b}. Tag. Heute waren beide dort. Nach wie vielen Tagen treffen sie sich wieder im Kino?`),line:["nach ",F(k)," Tagen"],why:`${k} ist die kleinste Zahl, die ein Vielfaches von ${a} und von ${b} ist.`};}
+ const p=pk([100,150,200,250]),k=rnd(2,Math.floor(900/p)),r=1000-k*p;return{prompt:"Sachaufgabe",show:TXT(`Ein Kind soll am Tag mindestens 1 Liter Wasser trinken. Nora hat ${k}-mal ${p} ml getrunken. Wie viele ml fehlen noch? (1 Liter = 1 000 ml)`),line:[F(r)," ml"],why:`${k} · ${p} = ${k*p} ml. 1 000 − ${k*p} = ${r} ml`};}
+
+const TH=[
+ {id:"z",short:"Zahlenraum 10 000",name:"Orientieren bis in den Zahlenraum 10 000",src:"MiniMax Teil A, S. 4–32",subs:[{name:"Verschiedene Darstellungen",g:[z_darst]},{name:"Zahlen schreiben, Zahlenrätsel",g:[z_schreib,z_raetsel]},{name:"Zahlenfolgen, Zahlen vergleichen",g:[z_folge,z_cmp]},{name:"Zahlenstrahl, Vorgänger, Nachfolger",g:[z_strahl,z_vn]},{name:"Ziffernsumme",g:[z_qs]}]},
+ {id:"l",short:"Länge + Sachrechnen",name:"Länge + Sachrechenstrategien",src:"MiniMax Größen (gelb), S. 2–6",subs:[{name:"Längen schätzen",g:[l_schaetz]},{name:"Längenmaße umwandeln",g:[l_umw,l_ergaenz]},{name:"Rechnen mit Längen",g:[l_rechnen]},{name:"Sachaufgaben",g:[l_sach]}]},
+ {id:"g",short:"Geometrie",name:"Geometrie",src:"MiniMax Geometrie (rot), S. 2–15, 35–36",subs:[{name:"Würfeldarstellungen",g:[g_wuerfel]},{name:"Symmetrie, Spiegeln",g:[g_sym]},{name:"Koordinaten im Planquadrat",g:[g_koord]},{name:"Arbeit mit dem Geodreieck",g:[g_geo]},{name:"Körper und Flächen",g:[g_koerper]}]},
+ {id:"r",short:"Grundrechnungsarten",name:"Grundrechnungsarten",src:"Teil A S. 58–65 · Teil B S. 25–35, 67–75",subs:[{name:"Addieren und subtrahieren",g:[r_addsub]},{name:"Multiplizieren",g:[r_mul]},{name:"Division (einstellig, Zehner)",g:[r_div]},{name:"Überschlag, Teiler, Fehler finden",g:[r_check]},{name:"Sachaufgaben, Diagramme, Zufall",g:[r_sach]}]}
+];
+window.SA_TH=TH;
+const mkTask=(t,s)=>{const q=pk(s.g)();q.sub=s.name;q.theme=t.short;q.key=q.prompt+(q.show||"")+JSON.stringify(q.line||q.opts);if(q.opts&&!q.fix)q.opts=shuf(q.opts);return q};
+function build(spec){const out=[],seen=new Set(),add=(t,s)=>{for(let k=0;k<25;k++){const q=mkTask(t,s);if(!seen.has(q.key)){seen.add(q.key);out.push(q);return}}};
+ if(spec.id==="probe"){TH.forEach(t=>{const ss=shuf(t.subs);for(let i=0;i<3;i++)add(t,ss[i%ss.length])});return out;}
+ const t=TH.find(x=>x.id===spec.id),subs=spec.si==null?t.subs:[t.subs[spec.si]];
+ let pool=[];while(out.length<10){if(!pool.length)pool=shuf(subs);add(t,pool.pop())}return out;}
+
+/* ---------- Ablauf ---------- */
+let R=null;
+const stars=n=>`<span class="sa-stars" aria-label="${n} von 3 Sternen">${[0,1,2].map(k=>`<span class="${k<n?"":"off"}">⭐</span>`).join("")}</span>`;
+const sol=q=>q.opts?esc(q.a):q.line.map(p=>typeof p==="string"?p:`<b>${N(p.ans)}</b>`).join("");
+const norm=s=>{const d=String(s).replace(/\D/g,"");return d===""?"":String(Number(d))};
+function view(w){["saMenu","saGame","saEnd"].forEach(id=>$(id).hidden=id!==w);window.scrollTo(0,0)}
+function cdText(){if(!db.saDate)return"Trag das Datum ein, dann zählen wir die Tage bis zur Schularbeit.";
+ const d=new Date(db.saDate+"T00:00"),t=new Date();t.setHours(0,0,0,0);const n=Math.round((d-t)/864e5);
+ return n>1?`Noch <b>${n} Tage</b> bis zur 1. Schularbeit.`:n===1?"<b>Morgen</b> ist die Schularbeit. Du schaffst das!":n===0?"<b>Heute</b> ist die Schularbeit. Viel Glück!":"Die Schularbeit ist schon vorbei. Üben schadet trotzdem nicht!"}
+function menu(){const best=(P().sa)||{};
+ $("saCdText").innerHTML=cdText();$("saDate").value=db.saDate||"";
+ $("saCards").innerHTML=TH.map((t,ti)=>`<div class="panel sa-card"><div class="sa-head"><span class="sa-num">${ti+1}</span><h3>${t.name}<span class="sa-src">${t.src}</span></h3>${stars(best[t.id]||0)}</div>
+  <div class="sa-subs">${t.subs.map((s,si)=>`<button data-t="${t.id}" data-s="${si}">${s.name}</button>`).join("")}</div>
+  <button class="big" data-t="${t.id}">Alles üben ▶</button></div>`).join("")
+  +`<div class="panel sa-card sa-probe"><div class="sa-head"><span class="sa-num">✎</span><h3>Probe-Schularbeit<span class="sa-src">12 gemischte Aufgaben aus allen 4 Themen</span></h3>${stars(best.probe||0)}</div><button class="big" data-t="probe" style="background:var(--berry);box-shadow:0 4px 0 #b02c4c">Probe-Schularbeit starten ▶</button></div>`;
+ $("saCards").querySelectorAll("button[data-t]").forEach(b=>b.onclick=()=>{beep(660);start({id:b.dataset.t,si:b.dataset.s==null?null:+b.dataset.s})});
+ view("saMenu");}
+function start(spec,list){
+ const t=TH.find(x=>x.id===spec.id),name=spec.id==="probe"?"Probe-Schularbeit":spec.si!=null?t.subs[spec.si].name:t.short;
+ R={spec,name,tasks:list||build(spec),i:0,res:[],tries:{},earned:0};
+ PlayLog.start(`1. Schularbeit · ${name}`,R.tasks.length);view("saGame");show();}
+function show(){const q=R.tasks[R.i];R.lock=false;
+ $("saBoard").innerHTML=`<div class="progress">${R.tasks.map((_,k)=>`<i class="${R.res[k]===true?"ok":R.res[k]===false?"no":k===R.i?"now":""}"></i>`).join("")}</div>
+  <div class="sa-tag">${q.theme} · ${q.sub}${q.again?" · 🔁 Wiederholung":""}</div>
+  <div class="sa-prompt">${q.prompt}</div>
+  ${q.show?`<div class="sa-show">${q.show}</div>`:""}
+  ${q.line?`<form class="sa-line" id="saForm" autocomplete="off">${q.line.map(p=>typeof p==="string"?`<span>${p}</span>`:`<input class="sa-in" inputmode="numeric" size="${Math.max(2,String(p.ans).length+1)}" aria-label="Antwort">`).join("")}<button class="sa-ok" type="submit">Prüfen</button></form>`:""}
+  ${q.opts?`<div class="sa-opts">${q.opts.map((o,i)=>`<button class="sa-opt" data-i="${i}">${esc(String(o))}</button>`).join("")}</div>`:""}
+  <div class="feedback" id="saFb"></div><div id="saNext"></div>`;
+ if(q.line){const f=$("saForm"),ins=[...f.querySelectorAll(".sa-in")];setTimeout(()=>{try{ins[0].focus({preventScroll:true})}catch(e){}},50);
+  f.onsubmit=e=>{e.preventDefault();if(R.lock)return;
+   if(ins.some(x=>x.value.trim()==="")){$("saFb").textContent="Füll zuerst alle Kästchen aus.";return}
+   const fs=q.line.filter(p=>typeof p!=="string");let ok=true;
+   ins.forEach((x,i)=>{const r=norm(x.value)===String(fs[i].ans);if(!r)ok=false;x.disabled=true;x.classList.add(r?"ok":"no")});
+   f.querySelector(".sa-ok").remove();settle(ok);};}
+ if(q.opts)$("saBoard").querySelectorAll(".sa-opt").forEach(b=>b.onclick=()=>{if(R.lock)return;const ok=q.opts[+b.dataset.i]===q.a;
+  $("saBoard").querySelectorAll(".sa-opt").forEach(x=>{x.disabled=true;if(q.opts[+x.dataset.i]===q.a)x.classList.add("right");else if(x===b)x.classList.add("wrong")});settle(ok)});}
+function settle(ok){R.lock=true;const q=R.tasks[R.i];R.res[R.i]=ok;let again=false;
+ if(!ok&&!R.tries[q.key]){R.tries[q.key]=1;R.tasks.push(Object.assign({},q,{again:true}));again=true}
+ $("saFb").innerHTML=(ok?"Richtig! +1 Münze":`Richtig wäre: ${sol(q)}${again?" – kommt nochmal":""}`)+`<span class="sa-why">${q.why}</span>`;
+ if(ok){R.earned++;jingle();addCoins(1,$("saFb"))}else{beep(220,.25,"triangle");const bd=$("saBoard");bd.classList.remove("shake");void bd.offsetWidth;bd.classList.add("shake")}
+ PlayLog.progress(R.res.filter(Boolean).length,R.tasks.length);
+ const last=R.i===R.tasks.length-1;$("saNext").innerHTML=`<button class="big" id="saGo" style="margin-top:6px">${last?"Ergebnis ansehen":"Weiter →"}</button>`;
+ $("saGo").onclick=()=>{R.i++;R.i<R.tasks.length?show():end()};$("saGo").focus({preventScroll:true});}
+function end(){const total=R.res.length,ok=R.res.filter(Boolean).length,pct=total?ok/total:0,st=pct>=.9?3:pct>=.7?2:pct>=.4?1:0;
+ PlayLog.progress(ok,total);const ms=PlayLog.end(true);
+ const p=P();p.sa=p.sa||{};if(R.spec.si==null&&!R.retry)p.sa[R.spec.id]=Math.max(p.sa[R.spec.id]||0,st);save();
+ const seen=new Set(),miss=[];R.tasks.forEach((q,k)=>{if(R.res[k]===false&&!seen.has(q.key)){seen.add(q.key);miss.push(q)}});
+ $("saEnd").innerHTML=`<div class="summary"><h2>${R.name}</h2>${stars(st).replace("sa-stars","sa-stars big")}<div class="score" id="saScore">${ok} / ${total}</div>
+  <p>${["Weiter üben, du schaffst das!","Guter Anfang!","Sehr gut gemacht!","Super, fast alles richtig!"][st]} Du hast ${R.earned+st*2} Münzen verdient${st?` (davon ${st*2} Sterne-Bonus)`:""}. Spielzeit: ${PlayLog.fmt(ms)}.</p></div>
+  ${miss.length?`<div class="timesbox"><h3>Das üben wir noch</h3><ol class="times">${miss.map(q=>`<li style="display:block"><small>${q.sub}</small><br>${q.prompt.replace(/<[^>]+>/g,"")}<br>→ ${sol(q)}</li>`).join("")}</ol></div>`:""}
+  ${miss.length?`<button class="big" id="saMiss" style="background:var(--berry);box-shadow:0 4px 0 #b02c4c">Nur die Fehler nochmal</button>`:""}
+  <button class="big" id="saAgain">Neue Aufgaben, gleiches Thema</button><button class="chip" id="saBack" style="align-self:center">Zur Übersicht</button>`;
+ if(st)setTimeout(()=>addCoins(st*2,$("saScore")),300);
+ if(miss.length)$("saMiss").onclick=()=>{const s=R.spec;start(s,miss.map(q=>Object.assign({},q,{again:false})));R.retry=true;R.name="Fehler wiederholen"};
+ $("saAgain").onclick=()=>start(R.spec);$("saBack").onclick=menu;view("saEnd");}
+$("saQuit").onclick=()=>{PlayLog.end(false);menu()};
+$("saDate").onchange=e=>{db.saDate=e.target.value;save();$("saCdText").innerHTML=cdText()};
+window.SA_menu=menu;
+})();
+
 PlayLog.init({game:'Mathe-Werkstatt',kid:()=>db.current,timerHost:$('plT'),boxHost:$('plB')});
 renderHead();renderPlayers();renderRows();renderOps();renderSlowBtn();renderAdv();
 if(window.OPEN_SHOP)showTab("laden");
